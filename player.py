@@ -24,11 +24,41 @@ class Player():
     # delta: Time passed (in seconds) since the previous frame.
     def update(self, delta):
         keys_pressed = pygame.key.get_pressed()
+
+        # player movement
         if (keys_pressed[K_w]):
-            self.position = (self.position[0], self.position[1] - delta * self.speed)
+            self.position[1] = self.position[1] - delta * self.speed
+            if (self.position[1] < 0):
+                self.position[1] = 0
+
         if (keys_pressed[K_s]):
-            self.position = (self.position[0], self.position[1] + delta * self.speed)
+            self.position[1] = self.position[1] + delta * self.speed
+            if (self.position[1] > Config.HEIGHT):
+                self.position[1] = Config.HEIGHT
+
         if (keys_pressed[K_a]):
-            self.position = (self.position[0] - delta * self.speed, self.position[1])
+            self.position[0] = self.position[0] - delta * self.speed
+            if (self.position[0] < 0):
+                self.position[0] = 0
+
         if (keys_pressed[K_d]):
-            self.position = (self.position[0] + delta * self.speed, self.position[1])
+            self.position[0] = self.position[0] + delta * self.speed
+            if (self.position[0] > Config.WIDTH):
+                self.position[0] = Config.WIDTH
+
+
+        # pidgeon switching
+        if (keys_pressed[K_1]):
+            self.main_pidgeon = self.pidgeons[0]
+        elif (keys_pressed[K_2]):
+            if (len(self.pidgeons) >= 2):
+                self.main_pidgeon = self.pidgeons[1]
+        elif (keys_pressed[K_3]):
+            if (len(self.pidgeons) >= 3):
+                self.main_pidgeon = self.pidgeons[2]
+        elif (keys_pressed[K_4]):
+            if (len(self.pidgeons) >= 4):
+                self.main_pidgeon = self.pidgeons[3]
+        elif (keys_pressed[K_5]):
+            if (len(self.pidgeons) >= 5):
+                self.main_pidgeon = self.pidgeons[4]
