@@ -6,10 +6,10 @@ from config import *
 class Player():
     # Constructor. Initialize any player variables.
     def __init__(self):
-        self.position = (0, Config.HEIGHT/2)
+        self.position = [0, Config.HEIGHT/2]
         self.main_pidgeon = Pidgeon(0) # load starting pidgeon
         self.pidgeons = [self.main_pidgeon]
-        self.speed = 10
+        self.speed = 100
     
     # Sets the control scheme for this player.
     def set_controls(self):
@@ -26,39 +26,42 @@ class Player():
         keys_pressed = pygame.key.get_pressed()
 
         # player movement
-        if (keys_pressed[K_w]):
+        if (keys_pressed[pygame.K_w]):
             self.position[1] = self.position[1] - delta * self.speed
             if (self.position[1] < 0):
                 self.position[1] = 0
 
-        if (keys_pressed[K_s]):
+        if (keys_pressed[pygame.K_s]):
             self.position[1] = self.position[1] + delta * self.speed
             if (self.position[1] > Config.HEIGHT):
                 self.position[1] = Config.HEIGHT
 
-        if (keys_pressed[K_a]):
+        if (keys_pressed[pygame.K_a]):
             self.position[0] = self.position[0] - delta * self.speed
             if (self.position[0] < 0):
                 self.position[0] = 0
 
-        if (keys_pressed[K_d]):
+        if (keys_pressed[pygame.K_d]):
             self.position[0] = self.position[0] + delta * self.speed
             if (self.position[0] > Config.WIDTH):
                 self.position[0] = Config.WIDTH
 
 
         # pidgeon switching
-        if (keys_pressed[K_1]):
+        if (keys_pressed[pygame.K_1]):
             self.main_pidgeon = self.pidgeons[0]
-        elif (keys_pressed[K_2]):
+        elif (keys_pressed[pygame.K_2]):
             if (len(self.pidgeons) >= 2):
                 self.main_pidgeon = self.pidgeons[1]
-        elif (keys_pressed[K_3]):
+        elif (keys_pressed[pygame.K_3]):
             if (len(self.pidgeons) >= 3):
                 self.main_pidgeon = self.pidgeons[2]
-        elif (keys_pressed[K_4]):
+        elif (keys_pressed[pygame.K_4]):
             if (len(self.pidgeons) >= 4):
                 self.main_pidgeon = self.pidgeons[3]
-        elif (keys_pressed[K_5]):
+        elif (keys_pressed[pygame.K_5]):
             if (len(self.pidgeons) >= 5):
                 self.main_pidgeon = self.pidgeons[4]
+        
+        # Update pidgeon
+        self.main_pidgeon.update(delta)
