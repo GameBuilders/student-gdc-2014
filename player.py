@@ -33,8 +33,8 @@ class Player():
 
         if (keys_pressed[pygame.K_s]):
             self.position[1] = self.position[1] + delta * self.speed
-            if (self.position[1] > Config.HEIGHT):
-                self.position[1] = Config.HEIGHT
+            if (self.position[1] + 64 > Config.HEIGHT):
+                self.position[1] = Config.HEIGHT - 64
 
         if (keys_pressed[pygame.K_a]):
             self.position[0] = self.position[0] - delta * self.speed
@@ -43,8 +43,8 @@ class Player():
 
         if (keys_pressed[pygame.K_d]):
             self.position[0] = self.position[0] + delta * self.speed
-            if (self.position[0] > Config.WIDTH):
-                self.position[0] = Config.WIDTH
+            if (self.position[0] + 64 > Config.WIDTH):
+                self.position[0] = Config.WIDTH - 64
 
 
         # pidgeon switching
