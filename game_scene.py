@@ -26,6 +26,7 @@ class GameScene(Scene):
           
     # Updates the scene according to the time passed since last update.
     def update(self, delta):
+        self.player.update(delta)
         pass
 
 class ProgressBar():
