@@ -3,7 +3,7 @@ from scenemanager import *
 
 # Import scenes
 from menu_scene import *
-
+from game_scene import *
 # Game class. Keeps track of everything we need to know about the game state (players, map, enemies, powerups, etc.).
 class Game():
     # Constructor. Initialize any variables and game objects.
@@ -17,9 +17,9 @@ class Game():
         
         # Add any scenes needed by the game here
         self.scene_manager.add_scene("MenuScene", MenuScene(self))
-        
+        self.scene_manager.add_scene("GameScene", GameScene(self))
         # Make sure to set the initial scene!
-        self.scene_manager.set_scene("MenuScene")
+        self.scene_manager.set_scene("GameScene")
     
     # Pauses the game. Pausing prevents any updates from being done.
     def pause(self):
