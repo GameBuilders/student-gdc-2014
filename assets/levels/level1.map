@@ -1,0 +1,36 @@
+# PRIMARY LEVEL DETAILS
+
+[level]
+front			= images/level1_front.png
+back			= images/level1_back.png
+duration	= 150
+
+# OBSTACLE/ENEMY LIST
+
+[obstacle0]
+type	= 0
+img 	= images/level1_obs_spikelow.png
+boxul	= (10,10)
+boxdr = (20,190)
+
+# TIMELINE OF EVENTS
+
+[10]
+obs 	= obstacle0
+pos		= 500
+
+[20]
+obs 	= obstacle0
+pos		= 500
+
+[30]
+obs 	= obstacle0
+pos		= 500
+
+[40]
+obs 	= obstacle0
+pos		= 500
+
+[50]
+obs 	= obstacle0
+pos		= 500
