@@ -18,8 +18,8 @@ class GameScene(Scene):
     def render(self, screen):
         # Render normal state
         
-        player.render       
-        ProgressBar.render
+        self.player.render()       
+        self.ProgressBar.render(pygame.display.get_surface())
 
         # Render How to Play state
         

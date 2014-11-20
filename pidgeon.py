@@ -1,4 +1,5 @@
 import pygame
+import os
 
 # Pidgeon class. Stores pidgeon attack and rendering information.
 class Pidgeon():
