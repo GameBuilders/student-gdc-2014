@@ -4,7 +4,7 @@ import pygame
 class Pidgeon():
     # Constructor. Loads pidgeon assets
     def __init__(self, type):
-        if (type == 0);
+        if (type == 0):
             self.sprite = pygame.image.load(os.path.join('assets', 'pidgeon.png'))
     
     # Render the pidgeon
