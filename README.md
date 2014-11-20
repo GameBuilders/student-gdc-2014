@@ -1,6 +1,6 @@
 student-gdc-2014
 ================
-
+ 
 The Gamebuilders group submission for the 2014 Global Student Game Developer Competition.
 
 
@@ -37,6 +37,13 @@ Level 2: Player saves Blue Pidgeon. Level contains fire-vulnerable enemies, and 
 Level 3: Player saves Purple Pidgeon. Level contains fast-moving obstacles that can be frozen and enemies that are vulnerable to ice (in addition to Level 2 mechanics)
 Level 4: Player saves Gold Pidgeon. Level contains unavoidable attacks (such as a big wave of something) that must be countered with purple pidgeon (in addition to Level 3 mechanics)
 Boss Level: Level contains a lot of enemies that must be countered by gold pidgeon (in addition to Level 4 mechanics)
+
+Obstacle Type
+-------------
+0 -> Stationary
+1 -> Moving Up
+2 -> Moving Down
+3 -> Moving Left
 
 
  Misc Notes
