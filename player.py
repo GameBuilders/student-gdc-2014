@@ -62,3 +62,6 @@ class Player():
         elif (keys_pressed[pygame.K_5]):
             if (len(self.pidgeons) >= 5):
                 self.main_pidgeon = self.pidgeons[4]
+        
+        # Update pidgeon
+        self.main_pidgeon.update(delta)

@@ -18,8 +18,8 @@ class GameScene(Scene):
     def render(self, screen):
         # Render normal state
         
-        self.player.render()       
-        self.ProgressBar.render(pygame.display.get_surface())
+        self.player.render()
+        self.ProgressBar.render(screen)
 
         # Render How to Play state
         
@@ -27,7 +27,6 @@ class GameScene(Scene):
     # Updates the scene according to the time passed since last update.
     def update(self, delta):
         self.player.update(delta)
-        pass
 
 class ProgressBar():
     
@@ -50,6 +49,4 @@ class ProgressBar():
     # Updates the scene according to the time passed since last update.
     def update(self, delta):
         progressindicator_rect.left= Config.WIDTH*progressRatio
-
-        pass
         
