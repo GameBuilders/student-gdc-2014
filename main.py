@@ -19,8 +19,7 @@ def main():
     pygame.display.set_caption("Student GDC")
 
     # Main game loop
-    running = True
-    while running:
+    while game.running:
         # Time since last frame (in seconds)
         delta = clock.tick() / 1000.0
     
@@ -28,7 +27,7 @@ def main():
         for event in pygame.event.get():
             # Quit if the user closes the window
             if event.type == pygame.QUIT:
-                running = False
+                game.running = False
         
         # Update the game according to the time passed since last frame
         game.update(delta)
@@ -37,7 +36,7 @@ def main():
         screen.fill((0, 0, 0))
         
         # Render the game!
-        game.render()
+        game.render(screen)
         
         # Tell Pygame to swap the screen buffers
         pygame.display.flip()
