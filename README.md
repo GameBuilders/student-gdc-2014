@@ -38,6 +38,13 @@ Level 3: Player saves Purple Pidgeon. Level contains fast-moving obstacles that 
 Level 4: Player saves Gold Pidgeon. Level contains unavoidable attacks (such as a big wave of something) that must be countered with purple pidgeon (in addition to Level 3 mechanics)
 Boss Level: Level contains a lot of enemies that must be countered by gold pidgeon (in addition to Level 4 mechanics)
 
+Obstacle Type
+-------------
+0 -> Stationary
+1 -> Moving Up
+2 -> Moving Down
+3 -> Moving Left
+
 
  Misc Notes
 ----------
