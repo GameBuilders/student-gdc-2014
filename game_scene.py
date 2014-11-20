@@ -35,19 +35,18 @@ class ProgressBar():
         self.progressbar_sprite = pygame.image.load('assets/progress_bar.png')
         self.progressindicator_sprite = pygame.image.load('assets/progress_indicator.png')
         self.progressindicator_rect= self.progressindicator_sprite.get_rect()
+        self.progressbar_rect= self.progressbar_sprite.get_rect()
         levellength = 2000
         progress = 800
         progressRatio = progress/levellength
     def render(self, screen):
         # Render normal state
 
-        screen.blit(self.progressbar_sprite,self.progressbar_sprite.get_rect())
+        screen.blit(self.progressbar_sprite,self.progressbar_rect)
         screen.blit(self.progressindicator_sprite,self.progressindicator_rect)
         
     
     # Updates the scene according to the time passed since last update.
     def update(self, delta):
         progressindicator_rect.left= Config.WIDTH*progressRatio
-
-        pass
         

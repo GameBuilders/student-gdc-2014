@@ -9,7 +9,7 @@ class Player():
         self.position = [0, Config.HEIGHT/2]
         self.main_pidgeon = Pidgeon(0) # load starting pidgeon
         self.pidgeons = [self.main_pidgeon]
-        self.speed = 100
+        self.speed = 200
     
     # Sets the control scheme for this player.
     def set_controls(self):
