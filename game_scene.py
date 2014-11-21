@@ -75,7 +75,7 @@ class GameScene(Scene):
             enemy.render(screen)
             
         # Render normal state
-        for i in range(len(self.player.pidgeons) - 1):
+        for i in range(self.game.num_pigeons - 1):
             self.cd_icon[i].render(screen)
 
         self.player.render()
@@ -87,9 +87,9 @@ class GameScene(Scene):
 
         #rescue banner
         if self.counter < 0:
-            get_sprite = self.red_get
+            get_sprite = self.blue_get
             if self.game.num_pigeons is 2:
-                get_sprite = self.blue_get
+                get_sprite = self.red_get
             elif self.game.num_pigeons is 3:
                 get_sprite = self.purple_get
             elif self.game.num_pigeons is 4:
@@ -225,5 +225,5 @@ class GameScene(Scene):
             self.ProgressBar.update(delta)
             
             # update special attack icons
-            for i in range(len(self.player.pidgeons) - 1):
+            for i in range(self.game.num_pigeons):
                 self.cd_icon[i].update(delta)
