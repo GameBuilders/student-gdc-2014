@@ -15,7 +15,7 @@ class Player():
         self.lives = 3
         self.dead = False
         self.stun = -1
-        self.alpha = 255
+        self.alpha = 255.0
     
     # Sets the control scheme for this player.
     def set_controls(self):
@@ -34,7 +34,7 @@ class Player():
     
     # Render the current state of the player.
     def render(self):
-        self.main_pidgeon.render(self.position, self.alpha)
+        self.main_pidgeon.render(self.position, int(self.alpha))
     
     # Update the state of the player.
     # delta: Time passed (in seconds) since the previous frame.
@@ -48,13 +48,13 @@ class Player():
             elif self.stun < delta:
                 self.dead = False
                 self.stun = -1
-                self.alpha = 255
+                self.alpha = 255.0
             else: 
                 self.stun -= delta
-                if self.alpha > 10*delta:
-                    self.alpha -= 10*delta
+                if self.alpha > 10:
+                    self.alpha -= delta * 255
                 else:
-                    self.alpha = 255
+                    self.alpha = 255.0
 
     
         keys_pressed = pygame.key.get_pressed()
