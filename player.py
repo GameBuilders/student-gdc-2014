@@ -41,8 +41,13 @@ class Player():
     # delta: Time passed (in seconds) since the previous frame.
     def update(self, delta, game_scene):
         if self.found_bird is True:
-            game_scene.game.num_pigeons += 1
-            game_scene.__init__(game_scene.game)
+            if game_scene.reset_pending is False:
+                game_scene.counter = -3
+                game_scene.game.num_pigeons += 1
+                game_scene.reset_pending = True
+            
+            elif game_scene.reset_pending is True and game_scene.counter > 0:
+                game_scene.__init__(game_scene.game)
         
         # death animation
         if self.dead:

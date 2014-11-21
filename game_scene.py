@@ -32,6 +32,7 @@ class GameScene(Scene):
         self.blue_get = pygame.image.load('assets/blue_get.png')
         self.purple_get = pygame.image.load('assets/purple_get.png')
         self.gold_get = pygame.image.load('assets/gold_get.png')
+        self.reset_pending = False
         
         self.lives_sprite= pygame.image.load('assets/heart.png')
         self.lives_rect= self.lives_sprite.get_rect()
@@ -85,7 +86,16 @@ class GameScene(Scene):
             screen.blit(self.lives_sprite,(10+self.lives_rect.left+(i*40),50))
 
         #rescue banner
-        if self.counter < 5:
+        if self.counter < 0:
+            get_sprite = self.red_get
+            if self.game.num_pigeons is 2:
+                get_sprite = self.blue_get
+            elif self.game.num_pigeons is 3:
+                get_sprite = self.purple_get
+            elif self.game.num_pigeons is 4:
+                get_sprite = self.gold_get
+            screen.blit(get_sprite, (Config.WIDTH / 2 - get_sprite.get_width() / 2, 200))
+        elif self.counter < 5:
             screen.blit(self.rescue_banner, (Config.WIDTH / 2 - self.rescue_banner.get_width() / 2, 200))
         
         # render game over screen
