@@ -59,7 +59,7 @@ class GameScene(Scene):
         self.player_projectile_cooldown -= delta
         if (self.player_projectile_cooldown < 0.0):
             self.player_projectile_cooldown = 0.5
-            self.player_projectiles.append(Projectile(self.player.position[0], self.player.position[1], 400.0, 0.0))
+            self.player_projectiles.append(Projectile(self.player.position[0], self.player.position[1]+32, 400.0, 0.0))
 
         # update projectiles
         for p in self.player_projectiles:
