@@ -38,7 +38,7 @@ class Player():
     # Update the state of the player.
     # delta: Time passed (in seconds) since the previous frame.
     def update(self, delta):
-
+    
         # death animation
         if self.dead:
             if self.stun == -1:

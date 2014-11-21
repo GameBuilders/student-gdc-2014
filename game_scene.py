@@ -19,6 +19,7 @@ class GameScene(Scene):
         # Call the base class's constructor
         self.player = Player()
         #self.player_projectiles = [] # use self.player.projectiles
+        self.enemy_projectiles = []
         self.player_projectile_cooldown = 0.5
 
         self.cd_icon = [CooldownIcon(0), CooldownIcon(1), CooldownIcon(2), CooldownIcon(3)]
@@ -52,6 +53,9 @@ class GameScene(Scene):
         # render player projectiles
         self.level.render(screen)
         for p in self.player.projectiles:
+            p.render(screen)
+       
+        for p in self.enemy_projectiles:
             p.render(screen)
 
         for obstacle in self.obstacles:
@@ -102,18 +106,29 @@ class GameScene(Scene):
             self.player.update(delta)
             self.player_projectile_cooldown -= delta
             bullettype = self.player.status
+            x = self.player.position[0]+60
+            y = self.player.position[1]+32
 
-            cap = 0.3
-            if bullettype == 0:
-                cap = 0.3
             if bullettype == 1:
                 cap = 0.2
+                damage = 50
+                sprite = self.sprite_b1
             if bullettype == 2:
                 cap = 0.5
+                damage = 15
+                sprite = self.sprite_b2
             if bullettype == 3:
                 cap = 0.2
+                damage = 30
+                sprite = self.sprite_b3
             if bullettype == 4:
                 cap = 0.1
+                damage = 50
+                sprite = self.sprite_b4
+            else:
+                cap = 0.3
+                damage = 25
+                sprite = self.sprite_b0
 
             # if you can shoot
             if (self.player_projectile_cooldown < 0.0):
@@ -121,20 +136,20 @@ class GameScene(Scene):
 
                 # attack patterns
                 if bullettype == 0:
-                    self.player.projectiles.append(Projectile(self.player.position[0]+60, self.player.position[1]+32, 400.0, 0.0, self.sprite_b0))
+                    self.player.projectiles.append(Projectile( x, y,    400.0, 0.0,     damage, sprite))
                 if bullettype == 1:
-                    self.player.projectiles.append(Projectile(self.player.position[0]+60, self.player.position[1]+32, 400.0, -200.0, self.sprite_b1))
-                    self.player.projectiles.append(Projectile(self.player.position[0]+60, self.player.position[1]+32, 400.0, 200.0, self.sprite_b1))
+                    self.player.projectiles.append(Projectile( x, y,    400.0, -200.0,  damage, sprite))
+                    self.player.projectiles.append(Projectile( x, y,    400.0, 200.0,   damage, sprite))
                 if bullettype == 2:
-                    self.player.projectiles.append(Projectile(self.player.position[0]+60, self.player.position[1]+32, 600.0, 150.0, self.sprite_b2))
-                    self.player.projectiles.append(Projectile(self.player.position[0]+60, self.player.position[1]+32, 600.0, 0.0, self.sprite_b2))
-                    self.player.projectiles.append(Projectile(self.player.position[0]+60, self.player.position[1]+32, 600.0, 300.0, self.sprite_b2))
-                    self.player.projectiles.append(Projectile(self.player.position[0]+60, self.player.position[1]+32, 600.0, -150.0, self.sprite_b2))
-                    self.player.projectiles.append(Projectile(self.player.position[0]+60, self.player.position[1]+32, 600.0, -300.0, self.sprite_b2))
+                    self.player.projectiles.append(Projectile( x, y,    600.0, 150.0,   damage, sprite))
+                    self.player.projectiles.append(Projectile( x, y,    600.0, 0.0,     damage, sprite))
+                    self.player.projectiles.append(Projectile( x, y,    600.0, 300.0,   damage, sprite))
+                    self.player.projectiles.append(Projectile( x, y,    600.0, -150.0,  damage, sprite))
+                    self.player.projectiles.append(Projectile( x, y,    600.0, -300.0,  damage, sprite))
                 if bullettype == 3:
-                    self.player.projectiles.append(Projectile(self.player.position[0]+60, self.player.position[1]+16, 400.0, 0.0, self.sprite_b3))
+                    self.player.projectiles.append(Projectile( x, y-32, 400.0, 0.0,     damage, sprite))
                 if bullettype == 4:
-                    self.player.projectiles.append(Projectile(self.player.position[0]+60, self.player.position[1]+32, 400.0, 0.0, self.sprite_b4))
+                    self.player.projectiles.append(Projectile( x, y,    400.0, 0.0,     damage, sprite))
 
             # update projectiles
             for p in self.player.projectiles:
@@ -142,6 +157,17 @@ class GameScene(Scene):
                 # remove projectiles that are off screen
                 if (p.x > Config.WIDTH or p.y > Config.HEIGHT or p.y < 0.0):
                     self.player.projectiles.remove(p)
+
+            player_rect = self.player.get_rect()
+            for p in self.enemy_projectiles:
+                p.update(delta)
+                
+                if player_rect.collidepoint(p.x, p.y):
+                    self.player.die()
+                
+                # remove projectiles that are off screen
+                if (p.x > Config.WIDTH or p.y > Config.HEIGHT or p.y < 0.0):
+                    self.enemy_projectiles.remove(p)
 
             # update obstacles
             obstacles_to_remove = []
@@ -161,7 +187,7 @@ class GameScene(Scene):
             for enemy in self.enemies:
                 # Make enemy move to match map scrolling speed
                 enemy.x -= Config.SCROLL_SPEED * delta
-                should_remove = enemy.update(delta, self.player)
+                should_remove = enemy.update(delta, self.player, self)
                 
                 if enemy.x < -50 or should_remove:
                     enemies_to_remove.append(enemy)

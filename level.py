@@ -12,6 +12,7 @@ class Level(object):
     def __init__(self, levelnumber):
 
         self.spritesheet = Spritesheet(os.path.join('assets', 'pidgeon_anim.png'), 64, 64)
+        self.bullet_sprite = pygame.image.load(os.path.join(os.path.join('assets','projectiles'),'gray.png'))
 
     
         # counter
@@ -81,7 +82,7 @@ class Level(object):
                 
                 if obstacle['type'] == '1':
                     # Enemy
-                    enemy = Enemy(self.spritesheet, int(event_list[1]))
+                    enemy = Enemy(self.spritesheet, int(event_list[1]), self.bullet_sprite)
                     game_scene.enemies.append(enemy)
                 else:
                     # Obstacles

@@ -24,6 +24,10 @@ class Entity():
         if rect.colliderect(player.get_rect()):
             # Kill the player!
             player.die()
+
+        if self.type == 3:#Chasing spike.
+            difference = player.position[1] - 50 - self.y
+            self.y += delta * 135 * (1 if difference > 10 else (-1 if difference < -10 else 0))
         
         # Check for player projectiles
         proj_to_remove = []
