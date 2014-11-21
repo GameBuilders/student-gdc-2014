@@ -80,9 +80,14 @@ class GameScene(Scene):
     # Updates the scene according to the time passed since last update.
     def update(self, delta):
 
-        if (self.player.lives is 2):
-            self.__init__(self.game)
-        if (self.player.lives > 0):
+        #if (self.player.lives is 2):
+        #    self.__init__(self.game)
+        if self.player.lives is 0:
+            # Restart upon pressing 'R'
+            keys_pressed = pygame.key.get_pressed()
+            if keys_pressed[pygame.K_r]:
+                self.__init__(self.game)
+        if self.player.lives > 0:
 
             self.level.update(delta, self)
             self.player.update(delta)
