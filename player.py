@@ -51,8 +51,8 @@ class Player():
                 self.alpha = 255
             else: 
                 self.stun -= delta
-                if self.alpha > 20:
-                    self.alpha -= 30
+                if self.alpha > 10*delta:
+                    self.alpha -= 10*delta
                 else:
                     self.alpha = 255
 
