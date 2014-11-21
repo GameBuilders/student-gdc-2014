@@ -3,12 +3,12 @@ import os
 
 class Projectile():
 
-	def __init__(self, x, y, x_vel, y_vel):
+	def __init__(self, x, y, x_vel, y_vel, sprite):
 		self.x = x
 		self.y = y
 		self.x_vel = x_vel
 		self.y_vel = y_vel
-		self.sprite = pygame.image.load(os.path.join('assets','projectile.png'))
+		self.sprite = sprite
 
 	def update(self,delta):
 		self.x += delta * self.x_vel

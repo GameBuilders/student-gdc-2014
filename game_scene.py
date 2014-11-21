@@ -33,6 +33,9 @@ class GameScene(Scene):
         self.level = Level(1)
         self.ProgressBar = ProgressBar(self.level)
 
+        # sprite initialization
+        self.sprite_bullet = pygame.image.load(os.path.join('assets','projectile.png'))
+
     # Renders the scene according to its current state.
     def render(self, screen):
 
@@ -59,8 +62,19 @@ class GameScene(Scene):
         self.player.update(delta)
         self.player_projectile_cooldown -= delta
         if (self.player_projectile_cooldown < 0.0):
-            self.player_projectile_cooldown = 0.5
-            self.player_projectiles.append(Projectile(self.player.position[0], self.player.position[1]+32, 400.0, 0.0))
+            self.player_projectile_cooldown = 0.2
+
+            # attack patterns
+            if self.player.status == 0:
+                self.player_projectiles.append(Projectile(self.player.position[0], self.player.position[1]+32, 400.0, 0.0, self.sprite_bullet))
+            if self.player.status == 1:
+                self.player_projectiles.append(Projectile(self.player.position[0], self.player.position[1]+32, 400.0, 200.0, self.sprite_bullet))
+                self.player_projectiles.append(Projectile(self.player.position[0], self.player.position[1]+32, 400.0, -200.0, self.sprite_bullet))
+            if self.player.status == 2:
+                self.player_projectiles.append(Projectile(self.player.position[0], self.player.position[1]+32, 400.0, 600.0, self.sprite_bullet))
+                self.player_projectiles.append(Projectile(self.player.position[0], self.player.position[1]+32, 400.0, -600.0, self.sprite_bullet))
+
+
 
         # update projectiles
         for p in self.player_projectiles:

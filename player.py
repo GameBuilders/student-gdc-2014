@@ -8,6 +8,7 @@ class Player():
     def __init__(self):
         self.position = [0, Config.HEIGHT/2]
         self.main_pidgeon = Pidgeon(0) # load starting pidgeon
+        self.status = 0
         self.pidgeons = [self.main_pidgeon, Pidgeon(1), Pidgeon(2)]
         self.speed = 200
     
@@ -50,18 +51,23 @@ class Player():
         # pidgeon switching
         if (keys_pressed[pygame.K_1]):
             self.main_pidgeon = self.pidgeons[0]
+            self.status = 0
         elif (keys_pressed[pygame.K_2]):
             if (len(self.pidgeons) >= 2):
                 self.main_pidgeon = self.pidgeons[1]
+                self.status = 1
         elif (keys_pressed[pygame.K_3]):
             if (len(self.pidgeons) >= 3):
                 self.main_pidgeon = self.pidgeons[2]
+                self.status = 2
         elif (keys_pressed[pygame.K_4]):
             if (len(self.pidgeons) >= 4):
                 self.main_pidgeon = self.pidgeons[3]
+                self.status = 3
         elif (keys_pressed[pygame.K_5]):
             if (len(self.pidgeons) >= 5):
                 self.main_pidgeon = self.pidgeons[4]
+                self.status = 4
         
         # Update pidgeon
         self.main_pidgeon.update(delta)
