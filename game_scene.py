@@ -4,6 +4,7 @@ from player import *
 from projectile import *
 from progressbar import *
 from cooldown import *
+from level import *
 
 # A scene sub-class that represents the game.
 class GameScene(Scene):
@@ -26,11 +27,13 @@ class GameScene(Scene):
         self.lives = 3
         self.lives_sprite= pygame.image.load('assets/heart.png')
         self.lives_rect= self.lives_sprite.get_rect()
+        self.level = Level(1)
 
     # Renders the scene according to its current state.
     def render(self, screen):
 
         # render player projectiles
+        self.level.render(screen)
         for p in self.player_projectiles:
             p.render(screen)
 
@@ -45,8 +48,8 @@ class GameScene(Scene):
           
     # Updates the scene according to the time passed since last update.
     def update(self, delta):
+        self.level.update(delta)
         self.player.update(delta)
-
         self.player_projectile_cooldown -= delta
         if (self.player_projectile_cooldown < 0.0):
             self.player_projectile_cooldown = 0.5

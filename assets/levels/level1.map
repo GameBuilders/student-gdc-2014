@@ -1,8 +1,8 @@
 # PRIMARY LEVEL DETAILS
 
 [level]
-front			= level1_front.png
-back			= level1_back.png
+front			= mockup.png
+back			= mockup.png
 duration	= 150
 
 # OBSTACLE/ENEMY LIST

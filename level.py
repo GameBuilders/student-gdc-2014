@@ -12,7 +12,7 @@ class Level(object):
         self.time = 0
         self.speed = 2
 
-        imgdir = "images"
+        imgdir = "assets"
              
         # create the parser
         parser = ConfigParser.ConfigParser()
@@ -24,6 +24,8 @@ class Level(object):
         self.background = pygame.image.load(os.path.join(imgdir, parser.get("level", "back"))).convert()
         self.foregroundx = 0
         self.backgroundx = 0
+        self.fwidth = self.foreground.get_width()
+        self.bwidth = self.background.get_width()
 
         # define the duration of the level
         self.duration = parser.get("level", "duration")
@@ -34,36 +36,35 @@ class Level(object):
 
         # store individual obstacle attributes
         self.obstacle = []
-        for item in obstaclelist:
-            obstacle.append(parser._sections[item])
+        for item in self.obstaclelist:
+            self.obstacle.append(parser._sections[item])
 
         # construct the timeline of events
         self.timeline = parser.items('events')
         self.timekeys = []
-        for item in timeline:
-            timekeys.append(int(item[0]))
+        for item in self.timeline:
+            self.timekeys.append(int(item[0]))
 
         # pop events as they occur
-        timeline = dict(timeline)
+        self.timeline = dict(self.timeline)
         if self.time in self.timekeys:
-            timeline.pop(str(self.time))
+            self.timeline.pop(str(self.time))
         
-    def render(self):
+    def render(self,screen):
 
-        screen = pygame.display.get_surface()
-        screen.blit(background, (self.backgroundx,0))
-        screen.blit(background, (self.backgroundx+self.background.width,0))
-        screen.blit(foreground, (self.foregroundx,0))
-        screen.blit(background, (self.foregroundx+self.foreground.width,0))
+        screen.blit(self.background, (self.backgroundx,0))
+        screen.blit(self.background, (self.backgroundx+self.bwidth,0))
+        screen.blit(self.foreground, (self.foregroundx,0))
+        screen.blit(self.foreground, (self.foregroundx+self.fwidth,0))
 
-    def update(self):
+    def update(self,delta):
 
-        self.time += 1
+        self.time += delta
 
-        self.backgroundx -= speed/2
-        self.foregroundx -= speed
+        self.backgroundx -= self.speed/2
+        self.foregroundx -= self.speed
 
-        if self.backgroundx < -1*(self.background.width):
-            if self.backgroundx += self.background.width
-        if self.foregroundx < -1*(self.foreground.width):
-            if self.foregroundx += self.foreground.width
+        if self.backgroundx < -1*(self.bwidth):
+             self.backgroundx += self.bwidth
+        if self.foregroundx < -1*(self.fwidth):
+             self.foregroundx += self.fwidth
