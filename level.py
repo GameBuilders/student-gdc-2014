@@ -17,6 +17,7 @@ class Level(object):
     
         # counter
         self.time = 0
+        self.scale = 1000
         self.speed = Config.SCROLL_SPEED
 
         directory = os.path.join("assets","levels")
@@ -57,6 +58,8 @@ class Level(object):
         self.timekeys, self.timeline = zip(*sorted(zip(self.timekeys, self.timeline)))    
         self.timekeys = list(self.timekeys)
         self.timeline = dict(self.timeline)
+
+        print self.timeline
         
     def render(self,screen):
 
@@ -68,7 +71,7 @@ class Level(object):
 
     def update(self,delta, game_scene):
 
-        self.time += delta
+        self.time += delta * self.scale
         
         # pop events as they occur
         if self.timekeys:
