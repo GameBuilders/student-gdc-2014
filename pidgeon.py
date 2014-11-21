@@ -7,7 +7,7 @@ class Pidgeon():
     # Constructor. Loads pidgeon assets
     def __init__(self, type):
         self.frame_idx = 0
-        self.frame_rate = 5.0
+        self.frame_rate = 12.0
         self.frame_time_left = 1 / self.frame_rate
     
         img_path = None
@@ -29,5 +29,5 @@ class Pidgeon():
             self.frame_idx += 1
             self.frame_time_left += 1 / self.frame_rate
         
-        if self.frame_idx >= 3:
+        if self.frame_idx >= 8:
             self.frame_idx = 0
