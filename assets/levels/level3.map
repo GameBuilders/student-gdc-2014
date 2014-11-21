@@ -74,3 +74,4 @@ boxdr	= (54,54)
 29000		= o_spikechasing,-150
 30000		= o_spikechasing,850
 31000		= o_spikechasing,850
+38000		= o_bird,380

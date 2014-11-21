@@ -22,9 +22,10 @@ class CooldownIcon():
         # Render normal state
         
         screen.blit(self.sprite,self.position)
-        if int(self.cooldown) > 0: 
-            self.size=self.font.size(str(int(self.cooldown)))
-            screen.blit(self.text, (self.position[0]+30-self.size[0]/2,Config.HEIGHT-60))
+        
+        #if int(self.cooldown) > 0: 
+        ##    self.size=self.font.size(str(int(self.cooldown)))
+        #    screen.blit(self.text, (self.position[0]+30-self.size[0]/2,Config.HEIGHT-60))
         
     
     # Updates the scene according to the time passed since last update.
