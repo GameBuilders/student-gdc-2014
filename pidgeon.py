@@ -13,13 +13,19 @@ class Pidgeon():
     
         self.spritesheet = Spritesheet(os.path.join('assets', 'pidgeon_anim.png'), 64, 64)
         
+        
     # Render the pidgeon
-    def render(self, position):
+    def render(self, position, alpha):
         frame_offset = self.type * 8
         sprite = self.spritesheet.get_sprite(frame_offset + self.frame_idx)
-    
+
+        surface = pygame.Surface((64,64)).convert()
+        surface.set_colorkey(pygame.Color('black'))
+        surface.set_alpha(alpha)
+        surface.blit(sprite, (0,0))
+
         screen = pygame.display.get_surface()
-        screen.blit(sprite, position)
+        screen.blit(surface, position)
 
     def update(self, delta):
         self.frame_time_left -= delta
