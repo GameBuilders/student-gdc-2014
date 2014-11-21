@@ -21,7 +21,10 @@ class GameScene(Scene):
         self.player_projectiles = []
         self.player_projectile_cooldown = 0.5
 
-        self.cooldownicon= CooldownIcon()
+        self.cooldownicon  = CooldownIcon(0)
+        self.cooldownicon2 = CooldownIcon(1)
+        self.cooldownicon3 = CooldownIcon(2)
+        self.cooldownicon4 = CooldownIcon(3)
 
         Scene.__init__(self, game)
         self.lives = 3
@@ -39,6 +42,9 @@ class GameScene(Scene):
 
         # Render normal state
         self.cooldownicon.render(screen)
+        self.cooldownicon2.render(screen)
+        self.cooldownicon3.render(screen)
+        self.cooldownicon4.render(screen)
         self.player.render()
         self.ProgressBar.render(screen)
 
@@ -53,7 +59,7 @@ class GameScene(Scene):
         self.player_projectile_cooldown -= delta
         if (self.player_projectile_cooldown < 0.0):
             self.player_projectile_cooldown = 0.5
-            self.player_projectiles.append(Projectile(self.player.position[0], self.player.position[1], 400.0, 0.0))
+            self.player_projectiles.append(Projectile(self.player.position[0], self.player.position[1]+32, 400.0, 0.0))
 
         # update projectiles
         for p in self.player_projectiles:
@@ -65,4 +71,8 @@ class GameScene(Scene):
 
         self.ProgressBar.update(delta)
         self.cooldownicon.update(delta)
+        self.cooldownicon2.update(delta)
+        self.cooldownicon3.update(delta)
+        self.cooldownicon4.update(delta)
+
 

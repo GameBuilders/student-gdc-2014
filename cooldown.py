@@ -1,11 +1,18 @@
 import pygame
 from config import *
+import os
+from spritesheet import *
 
 class CooldownIcon():
     
-    def __init__(self):
-        self.fireball_sprite = pygame.image.load('assets/fireball_icon.png')
-        self.fireball_rect= self.fireball_sprite.get_rect()
+    def __init__(self, type):
+        img_path = os.path.join('assets', 'icons.png')
+        self.spritesheet = Spritesheet(img_path, 64, 64)
+        self.sprite = self.spritesheet.get_sprite(type)
+        self.rect = self.sprite.get_rect()
+
+        self.position = (10 + (type*(self.rect.width+10)), Config.HEIGHT-80)
+
         self.font = pygame.font.Font(None, 36)
         self.cooldown=20
         self.text = self.font.render(str(self.cooldown), 1, (255, 10, 10))
@@ -14,10 +21,10 @@ class CooldownIcon():
     def render(self, screen):
         # Render normal state
         
-        screen.blit(self.fireball_sprite,(10+self.fireball_rect.left,Config.HEIGHT-80))
+        screen.blit(self.sprite,self.position)
         if int(self.cooldown) > 0: 
             self.size=self.font.size(str(int(self.cooldown)))
-            screen.blit(self.text, (40+self.fireball_rect.left-self.size[0]/2,Config.HEIGHT-60))
+            screen.blit(self.text, (self.position[0]+30-self.size[0]/2,Config.HEIGHT-60))
         
     
     # Updates the scene according to the time passed since last update.
