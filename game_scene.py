@@ -35,6 +35,11 @@ class GameScene(Scene):
         self.sprite_bullet = pygame.image.load(os.path.join('assets','projectile.png'))
         Scene.__init__(self, game)
 
+        # game over alpha
+        self.alpha_gameover = 0
+        self.sprite_gameover = pygame.image.load(os.path.join('assets','lose_screen.png')).convert_alpha()
+        self.surface_gameover = pygame.Surface(self.sprite_gameover.get_size(), depth=24)
+
     # Renders the scene according to its current state.
     def render(self, screen):
 
@@ -58,7 +63,18 @@ class GameScene(Scene):
             screen.blit(self.lives_sprite,(10+self.lives_rect.left+(i*40),50))
 
         # render game over screen
-        if (self.player.lives > 0):
+        if (self.player.lives <= 0):
+            
+            if self.alpha_gameover < 255:
+                self.alpha_gameover += 10
+
+            key = pygame.Color('black')
+            #self.surface_gameover.fill(key)
+            self.surface_gameover.set_colorkey(key)
+            self.surface_gameover.blit(self.sprite_gameover, (0,0))
+            self.surface_gameover.set_alpha(self.alpha_gameover) 
+            screen.fill(pygame.Color('black'))
+            screen.blit(self.surface_gameover, (0,0))
             pass
 
     # Updates the scene according to the time passed since last update.
