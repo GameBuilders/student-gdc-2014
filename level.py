@@ -10,7 +10,7 @@ class Level(object):
     def __init__(self, levelnumber):
 
         # counter
-        self.time = 8
+        self.time = 0
         self.speed = Config.SCROLL_SPEED
 
         directory = os.path.join("assets","levels")
