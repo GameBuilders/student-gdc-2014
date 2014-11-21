@@ -6,19 +6,17 @@ from spritesheet import *
 class Pidgeon():
     # Constructor. Loads pidgeon assets
     def __init__(self, type):
+        self.type = type
         self.frame_idx = 0
         self.frame_rate = 12.0
         self.frame_time_left = 1 / self.frame_rate
     
-        img_path = None
-        if (type == 0):
-            img_path = os.path.join('assets', 'pidgeon_anim.png')
-
-        self.spritesheet = Spritesheet(img_path, 64, 64)
+        self.spritesheet = Spritesheet(os.path.join('assets', 'pidgeon_anim.png'), 64, 64)
         
     # Render the pidgeon
     def render(self, position):
-        sprite = self.spritesheet.get_sprite(self.frame_idx)
+        frame_offset = self.type * 8
+        sprite = self.spritesheet.get_sprite(frame_offset + self.frame_idx)
     
         screen = pygame.display.get_surface()
         screen.blit(sprite, position)

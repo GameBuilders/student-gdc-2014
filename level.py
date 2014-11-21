@@ -62,9 +62,9 @@ class Level(object):
         self.time += delta
 
         # pop events as they occur
-        if not empty(self.timekeys):
+        if self.timekeys:
             if self.time >= self.timekeys[0]:
-                event = self.timeline.pop(str(self.time))
+                event = self.timeline.pop(str(int(self.time)))
                 self.timekeys.pop(0)
                 
                 # TODO: handle event here
