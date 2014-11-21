@@ -102,18 +102,29 @@ class GameScene(Scene):
             self.player.update(delta)
             self.player_projectile_cooldown -= delta
             bullettype = self.player.status
+            x = self.player.position[0]+60
+            y = self.player.position[1]+32
 
-            cap = 0.3
-            if bullettype == 0:
-                cap = 0.3
             if bullettype == 1:
                 cap = 0.2
+                damage = 50
+                sprite = self.sprite_b1
             if bullettype == 2:
                 cap = 0.5
+                damage = 15
+                sprite = self.sprite_b2
             if bullettype == 3:
                 cap = 0.2
+                damage = 30
+                sprite = self.sprite_b3
             if bullettype == 4:
                 cap = 0.1
+                damage = 50
+                sprite = self.sprite_b4
+            else:
+                cap = 0.3
+                damage = 25
+                sprite = self.sprite_b0
 
             # if you can shoot
             if (self.player_projectile_cooldown < 0.0):
@@ -121,20 +132,20 @@ class GameScene(Scene):
 
                 # attack patterns
                 if bullettype == 0:
-                    self.player_projectiles.append(Projectile(self.player.position[0]+60, self.player.position[1]+32, 400.0, 0.0, self.sprite_b0))
+                    self.player_projectiles.append(Projectile( x, y,    400.0, 0.0,     damage, sprite))
                 if bullettype == 1:
-                    self.player_projectiles.append(Projectile(self.player.position[0]+60, self.player.position[1]+32, 400.0, 200.0, self.sprite_b1))
-                    self.player_projectiles.append(Projectile(self.player.position[0]+60, self.player.position[1]+32, 400.0, -200.0, self.sprite_b1))
+                    self.player_projectiles.append(Projectile( x, y,    400.0, 200.0,   damage, sprite))
+                    self.player_projectiles.append(Projectile( x, y,    400.0, -200.0,  damage, sprite))
                 if bullettype == 2:
-                    self.player_projectiles.append(Projectile(self.player.position[0]+60, self.player.position[1]+32, 600.0, 150.0, self.sprite_b2))
-                    self.player_projectiles.append(Projectile(self.player.position[0]+60, self.player.position[1]+32, 600.0, 0.0, self.sprite_b2))
-                    self.player_projectiles.append(Projectile(self.player.position[0]+60, self.player.position[1]+32, 600.0, 300.0, self.sprite_b2))
-                    self.player_projectiles.append(Projectile(self.player.position[0]+60, self.player.position[1]+32, 600.0, -150.0, self.sprite_b2))
-                    self.player_projectiles.append(Projectile(self.player.position[0]+60, self.player.position[1]+32, 600.0, -300.0, self.sprite_b2))
+                    self.player_projectiles.append(Projectile( x, y,    600.0, 150.0,   damage, sprite))
+                    self.player_projectiles.append(Projectile( x, y,    600.0, 0.0,     damage, sprite))
+                    self.player_projectiles.append(Projectile( x, y,    600.0, 300.0,   damage, sprite))
+                    self.player_projectiles.append(Projectile( x, y,    600.0, -150.0,  damage, sprite))
+                    self.player_projectiles.append(Projectile( x, y,    600.0, -300.0,  damage, sprite))
                 if bullettype == 3:
-                    self.player_projectiles.append(Projectile(self.player.position[0]+60, self.player.position[1]+16, 400.0, 0.0, self.sprite_b3))
+                    self.player_projectiles.append(Projectile( x, y-32, 400.0, 0.0,     damage, sprite))
                 if bullettype == 4:
-                    self.player_projectiles.append(Projectile(self.player.position[0]+60, self.player.position[1]+32, 400.0, 0.0, self.sprite_b4))
+                    self.player_projectiles.append(Projectile( x, y,    400.0, 0.0,     damage, sprite))
 
             # update projectiles
             for p in self.player_projectiles:
