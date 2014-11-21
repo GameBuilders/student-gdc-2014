@@ -89,27 +89,27 @@ class Player():
         if (keys_pressed[pygame.K_1]):
             self.main_pidgeon = self.pidgeons[0]
             self.status = 0
-            play_sound('assets/sounds/pidgeon_dying.wav')
+            play_sound('assets/sounds/switching.wav')
         elif (keys_pressed[pygame.K_2]):
             if (len(self.pidgeons) >= 2):
                 self.main_pidgeon = self.pidgeons[1]
                 self.status = 1
-                play_sound('assets/sounds/pidgeon_dying.wav')
+                play_sound('assets/sounds/switching.wav')
         elif (keys_pressed[pygame.K_3]):
             if (len(self.pidgeons) >= 3):
                 self.main_pidgeon = self.pidgeons[2]
                 self.status = 2
-                play_sound('assets/sounds/pidgeon_dying.wav')
+                play_sound('assets/sounds/switching.wav')
         elif (keys_pressed[pygame.K_4]):
             if (len(self.pidgeons) >= 4):
                 self.main_pidgeon = self.pidgeons[3]
                 self.status = 3
-                play_sound('assets/sounds/pidgeon_dying.wav')
+                play_sound('assets/sounds/switching.wav')
         elif (keys_pressed[pygame.K_5]):
             if (len(self.pidgeons) >= 5):
                 self.main_pidgeon = self.pidgeons[4]
                 self.status = 4
-                play_sound('assets/sounds/pidgeon_dying.wav')
+                play_sound('assets/sounds/switching.wav')
         
         # Update pidgeon
         self.main_pidgeon.update(delta)
