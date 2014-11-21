@@ -80,7 +80,7 @@ class GameScene(Scene):
             screen.blit(self.lives_sprite,(10+self.lives_rect.left+(i*40),50))
 
         #rescue banner
-        if self.counter < 3:
+        if self.counter < 5:
             screen.blit(self.rescue_banner, (Config.WIDTH / 2 - self.rescue_banner.get_width() / 2, 200))
         
         # render game over screen
