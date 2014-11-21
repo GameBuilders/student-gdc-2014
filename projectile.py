@@ -9,6 +9,7 @@ class Projectile():
 		self.x_vel = x_vel
 		self.y_vel = y_vel
 		self.sprite = sprite
+		self.damage = 25
 
 	def update(self,delta):
 		self.x += delta * self.x_vel

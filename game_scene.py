@@ -18,7 +18,7 @@ class GameScene(Scene):
         
         # Call the base class's constructor
         self.player = Player()
-        self.player_projectiles = []
+        #self.player_projectiles = [] # use self.player.projectiles
         self.player_projectile_cooldown = 0.5
 
         self.cd_icon = [CooldownIcon(0), CooldownIcon(1), CooldownIcon(2), CooldownIcon(3)]
@@ -51,7 +51,7 @@ class GameScene(Scene):
 
         # render player projectiles
         self.level.render(screen)
-        for p in self.player_projectiles:
+        for p in self.player.projectiles:
             p.render(screen)
 
         for obstacle in self.obstacles:
@@ -148,11 +148,11 @@ class GameScene(Scene):
                     self.player_projectiles.append(Projectile( x, y,    400.0, 0.0,     damage, sprite))
 
             # update projectiles
-            for p in self.player_projectiles:
+            for p in self.player.projectiles:
                 p.update(delta)
                 # remove projectiles that are off screen
                 if (p.x > Config.WIDTH or p.y > Config.HEIGHT or p.y < 0.0):
-                    self.player_projectiles.remove(p)
+                    self.player.projectiles.remove(p)
 
             # update obstacles
             obstacles_to_remove = []
@@ -172,9 +172,9 @@ class GameScene(Scene):
             for enemy in self.enemies:
                 # Make enemy move to match map scrolling speed
                 enemy.x -= Config.SCROLL_SPEED * delta
-                enemy.update(delta, self.player)
+                should_remove = enemy.update(delta, self.player)
                 
-                if enemy.x < -50:
+                if enemy.x < -50 or should_remove:
                     enemies_to_remove.append(enemy)
             
             for enemy in enemies_to_remove:

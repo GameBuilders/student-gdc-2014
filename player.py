@@ -13,6 +13,8 @@ class Player():
         self.pidgeons = [self.main_pidgeon, Pidgeon(1), Pidgeon(2), Pidgeon(3), Pidgeon(4)]
         self.speed = 200
         
+        self.projectiles = []
+        
         self.lives = 1
         self.dead = False
         self.stun = -1
