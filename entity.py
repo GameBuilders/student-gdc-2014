@@ -5,10 +5,13 @@ from config import *
 class Entity():
 
     # Constructor. Initialize any player variables.
-    def __init__(self, sprite, x, y):
+    def __init__(self, sprite, x, y, t):
         self.sprite = sprite
         self.x = x
         self.y = y
+        self.state = 0
+        self.type = t
+        
     
     # Render the entity.
     def render(self, screen):

@@ -79,16 +79,14 @@ class Level(object):
                 
                 obstacle = self.obstacle[event_list[0]]
                 
-                if obstacle['type'] == '0':
-                    # Obstacle
-                    obs = Entity(obstacle['sprite'], Config.WIDTH + 32, int(event_list[1]))
-                    game_scene.obstacles.append(obs)
-                elif obstacle['type'] == '1':
+                if obstacle['type'] == '1':
                     # Enemy
                     enemy = Enemy(self.spritesheet, int(event_list[1]))
                     game_scene.enemies.append(enemy)
-                
-                print obstacle
+                else:
+                    # Obstacles
+                    obs = Entity(obstacle['sprite'], Config.WIDTH + 32, int(event_list[1]), int(obstacle['type']))
+                    game_scene.obstacles.append(obs)
                 
                 # event[0] contains the object name
                 # event[1] contains the y-coordinate at which it should be placed
