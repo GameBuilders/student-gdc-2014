@@ -29,7 +29,7 @@ class Level(object):
         self.bwidth = self.background.get_width()
 
         # define the duration of the level
-        self.duration = parser.get("level", "duration")
+        self.duration = int(parser.get("level", "duration"))
 
         # locate all the obstacles
         self.sections = parser.sections()
