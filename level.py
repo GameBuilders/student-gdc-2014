@@ -49,8 +49,6 @@ class Level(object):
         self.timekeys, self.timeline = zip(*sorted(zip(self.timekeys, self.timeline)))    
         self.timekeys = list(self.timekeys)
         self.timeline = dict(self.timeline)
-
-        print self.timeline
         
     def render(self,screen):
 
@@ -63,8 +61,6 @@ class Level(object):
     def update(self,delta):
 
         self.time += delta
-        print "Time " +str(self.time)
-        print "Timekey " +str(list(self.timekeys))
         
         # pop events as they occur
         if self.timekeys:
@@ -73,6 +69,8 @@ class Level(object):
                 print "Event at " + str(self.timekeys[0]) 
                 self.timekeys.pop(0)
                 
+                # event[0] contains the object name
+                # event[1] contains the y-coordinate at which it should be placed
                 print event
                 # TODO: handle event here
 
