@@ -13,9 +13,11 @@ class Player():
         self.pidgeons = [self.main_pidgeon, Pidgeon(1), Pidgeon(2), Pidgeon(3), Pidgeon(4)]
         self.speed = 200
         
+        self.found_bird = False
+        
         self.projectiles = []
         
-        self.lives = 1
+        self.lives = 3
         self.dead = False
         self.stun = -1
         self.alpha = 255.0
@@ -37,8 +39,11 @@ class Player():
     
     # Update the state of the player.
     # delta: Time passed (in seconds) since the previous frame.
-    def update(self, delta):
-    
+    def update(self, delta, game_scene):
+        if self.found_bird is True:
+            game_scene.game.num_pigeons += 1
+            game_scene.__init__(game_scene.game)
+        
         # death animation
         if self.dead:
             if self.stun == -1:

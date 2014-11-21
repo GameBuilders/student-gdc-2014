@@ -26,7 +26,7 @@ class GameScene(Scene):
 
         self.lives_sprite= pygame.image.load('assets/heart.png')
         self.lives_rect= self.lives_sprite.get_rect()
-        self.level = Level(1)
+        self.level = Level(self.game.num_pigeons)
         self.ProgressBar = ProgressBar(self.level)
         
         self.enemies = []
@@ -103,7 +103,7 @@ class GameScene(Scene):
         if self.player.lives > 0:
 
             self.level.update(delta, self)
-            self.player.update(delta)
+            self.player.update(delta, self)
             self.player_projectile_cooldown -= delta
             bullettype = self.player.status
             x = self.player.position[0]+60

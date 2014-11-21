@@ -31,7 +31,7 @@ class Entity():
 
             if self.type == 3:#Chasing spike.
                 difference = player.position[1] - 50 - self.y
-                self.y += delta * 135 * (1 if difference > 10 else (-1 if difference < -10 else 0))
+                self.y += delta * 90 * (1 if difference > 10 else (-1 if difference < -10 else 0))
             
             # Check for player projectiles
             proj_to_remove = []
@@ -44,4 +44,4 @@ class Entity():
         else:
 
             if rect.colliderect(player.get_rect()):
-                
+                player.found_bird = True
