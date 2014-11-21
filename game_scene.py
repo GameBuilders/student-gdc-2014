@@ -54,6 +54,9 @@ class GameScene(Scene):
         self.level.render(screen)
         for p in self.player.projectiles:
             p.render(screen)
+       
+        for p in self.enemy_projectiles:
+            p.render(screen)
 
         for obstacle in self.obstacles:
             obstacle.render(screen)
@@ -155,12 +158,17 @@ class GameScene(Scene):
                 if (p.x > Config.WIDTH or p.y > Config.HEIGHT or p.y < 0.0):
                     self.player.projectiles.remove(p)
 
+            player_rect = self.player.get_rect()
             for p in self.enemy_projectiles:
                 p.update(delta)
+                
+                if player_rect.collidepoint(p.x, p.y):
+                    self.player.die()
+                
                 # remove projectiles that are off screen
                 if (p.x > Config.WIDTH or p.y > Config.HEIGHT or p.y < 0.0):
                     self.enemy_projectiles.remove(p)
-                    
+
             # update obstacles
             obstacles_to_remove = []
             for obstacle in self.obstacles:

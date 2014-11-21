@@ -28,7 +28,7 @@ class Enemy():
             self.fire_timer += self.fire_rate
             
             # Add a projectile
-            game_scene.enemy_projectiles.append(Projectile(self.x, self.y, -400.0, 0.0, 100, self.bullet))
+            game_scene.enemy_projectiles.append(Projectile(self.x, self.y + 15, -400.0, 0.0, 100, self.bullet))
     
         self.frame_time -= delta
         if self.frame_time <= 0:

@@ -14,7 +14,7 @@ def main():
     screen = pygame.display.set_mode(size)
 
     # Set the window title
-    pygame.display.set_caption("Student GDC")
+    pygame.display.set_caption("Pigeon Rangers")
 
     game = Game()
 
