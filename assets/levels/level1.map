@@ -1,13 +1,13 @@
 # PRIMARY LEVEL DETAILS
 
 [level]
-front			= images/level1_front.png
-back			= images/level1_back.png
+front			= level1_front.png
+back			= level1_back.png
 duration	= 150
 
 # OBSTACLE/ENEMY LIST
 
-[obstacle0]
+[o_spikelow]
 type	= 0
 img 	= images/level1_obs_spikelow.png
 boxul	= (10,10)
@@ -15,22 +15,10 @@ boxdr = (20,190)
 
 # TIMELINE OF EVENTS
 
-[10]
-obs 	= obstacle0
-pos		= 500
-
-[20]
-obs 	= obstacle0
-pos		= 500
-
-[30]
-obs 	= obstacle0
-pos		= 500
-
-[40]
-obs 	= obstacle0
-pos		= 500
-
-[50]
-obs 	= obstacle0
-pos		= 500
+[events]
+10 		= [o_spikelow, 500]
+50 		= [o_spikelow, 100]
+20 		= [o_spikelow, 300]
+30 		= [o_spikelow, 400]
+60 		= [o_spikelow, 200]
+40 		= [o_spikelow, 600]
