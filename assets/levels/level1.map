@@ -16,9 +16,12 @@ boxdr = (20,190)
 # TIMELINE OF EVENTS
 
 [events]
+5 		= o_spikelow,100
 10 		= o_spikelow,500
-50 		= o_spikelow,100
+15 		= o_spikelow,200
+20 		= o_spikelow,500
+25 		= o_spikelow,300
 30 		= o_spikelow,400
-60 		= o_spikelow,200
-20 		= o_spikelow,300
-40 		= o_spikelow,600
+35 		= o_spikelow,200
+40 		= o_spikelow,300
+45 		= o_spikelow,600
