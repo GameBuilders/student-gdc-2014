@@ -35,6 +35,11 @@ class GameScene(Scene):
         self.sprite_bullet = pygame.image.load(os.path.join('assets','projectile.png'))
         Scene.__init__(self, game)
 
+        # game over alpha
+        self.alpha_gameover = 0
+        self.sprite_gameover = pygame.image.load(os.path.join('assets','lose_screen.png')).convert_alpha()
+        self.surface_gameover = pygame.Surface(self.sprite_gameover.get_size(), depth=24)
+
     # Renders the scene according to its current state.
     def render(self, screen):
 
@@ -58,7 +63,18 @@ class GameScene(Scene):
             screen.blit(self.lives_sprite,(10+self.lives_rect.left+(i*40),50))
 
         # render game over screen
-        if (self.player.lives > 0):
+        if (self.player.lives <= 0):
+            
+            if self.alpha_gameover < 255:
+                self.alpha_gameover += 10
+
+            key = pygame.Color('black')
+            #self.surface_gameover.fill(key)
+            self.surface_gameover.set_colorkey(key)
+            self.surface_gameover.blit(self.sprite_gameover, (0,0))
+            self.surface_gameover.set_alpha(self.alpha_gameover) 
+            screen.fill(pygame.Color('black'))
+            screen.blit(self.surface_gameover, (0,0))
             pass
 
     # Updates the scene according to the time passed since last update.
@@ -88,13 +104,13 @@ class GameScene(Scene):
                 self.player_projectile_cooldown = cap
 
                 # attack patterns
-                if self.player.status == 0:
+                if bullettype == 0:
                     self.player_projectiles.append(Projectile(self.player.position[0]+60, self.player.position[1]+28, 400.0, 0.0, self.sprite_bullet))
                     self.player_projectiles.append(Projectile(self.player.position[0]+60, self.player.position[1]+36, 400.0, 0.0, self.sprite_bullet))
-                if self.player.status == 1:
+                if bullettype == 1:
                     self.player_projectiles.append(Projectile(self.player.position[0]+60, self.player.position[1]+32, 400.0, 200.0, self.sprite_bullet))
                     self.player_projectiles.append(Projectile(self.player.position[0]+60, self.player.position[1]+32, 400.0, -200.0, self.sprite_bullet))
-                if self.player.status == 2:
+                if bullettype == 2:
                     self.player_projectiles.append(Projectile(self.player.position[0]+60, self.player.position[1]+32, 600.0, 150.0, self.sprite_bullet))
                     self.player_projectiles.append(Projectile(self.player.position[0]+60, self.player.position[1]+32, 600.0, 0.0, self.sprite_bullet))
                     self.player_projectiles.append(Projectile(self.player.position[0]+60, self.player.position[1]+32, 600.0, 300.0, self.sprite_bullet))
