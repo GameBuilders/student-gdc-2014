@@ -10,11 +10,24 @@ class Player():
         self.main_pidgeon = Pidgeon(0) # load starting pidgeon
         self.pidgeons = [self.main_pidgeon, Pidgeon(1), Pidgeon(2)]
         self.speed = 200
+        
+        self.lives = 3
+        self.dead = False
     
     # Sets the control scheme for this player.
     def set_controls(self):
         pass
         #self.control_forward = 
+    
+    def get_rect(self):
+        return pygame.Rect(self.position[0], self.position[1], 64, 64)
+    
+    # Kill the player!
+    def die(self):
+        if not self.dead:
+            print "Player died!"
+            self.lives -= 1
+            self.dead = True
     
     # Render the current state of the player.
     def render(self):
@@ -23,6 +36,10 @@ class Player():
     # Update the state of the player.
     # delta: Time passed (in seconds) since the previous frame.
     def update(self, delta):
+        if self.dead:
+            # TODO
+            pass
+    
         keys_pressed = pygame.key.get_pressed()
 
         # player movement

@@ -26,7 +26,6 @@ class GameScene(Scene):
         self.cooldownicon3 = CooldownIcon(2)
         self.cooldownicon4 = CooldownIcon(3)
 
-        self.lives = 3
         self.lives_sprite= pygame.image.load('assets/heart.png')
         self.lives_rect= self.lives_sprite.get_rect()
         self.level = Level(1)
@@ -56,7 +55,7 @@ class GameScene(Scene):
         self.player.render()
         self.ProgressBar.render(screen)
 
-        for i in range(self.lives):
+        for i in range(self.player.lives):
             screen.blit(self.lives_sprite,(10+self.lives_rect.left+(i*40),50))
         
           
@@ -81,7 +80,7 @@ class GameScene(Scene):
         for obstacle in self.obstacles:
             # Make obstacle move to match map scrolling speed
             obstacle.x -= Config.SCROLL_SPEED * delta
-            obstacle.update(delta)
+            obstacle.update(delta, self.player)
             
             if obstacle.x < -50:
                 obstacles_to_remove.append(obstacle)

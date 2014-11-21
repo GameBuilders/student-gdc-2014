@@ -14,7 +14,10 @@ class Entity():
     def render(self, screen):
         screen.blit(self.sprite, (self.x, self.y))
     
-    # Update the state of the player.
+    # Update the state of the entity.
     # delta: Time passed (in seconds) since the previous frame.
-    def update(self, delta):
-        pass
+    def update(self, delta, player):
+        rect = pygame.Rect(self.x, self.y, self.sprite.get_width(), self.sprite.get_height())
+        if rect.colliderect(player.get_rect()):
+            # Kill the player!
+            player.die()
