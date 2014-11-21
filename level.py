@@ -9,7 +9,7 @@ class Level(object):
     def __init__(self, levelnumber):
 
         # counter
-        self.time = 0
+        self.time = 8
         self.speed = 2
 
         directory = os.path.join("assets","levels")
@@ -45,9 +45,12 @@ class Level(object):
         self.timekeys = []
         for item in self.timeline:
             self.timekeys.append(int(item[0]))
-        self.timekeys.sort()
         
+        self.timekeys, self.timeline = zip(*sorted(zip(self.timekeys, self.timeline)))    
+        self.timekeys = list(self.timekeys)
         self.timeline = dict(self.timeline)
+
+        print self.timeline
         
     def render(self,screen):
 
@@ -60,19 +63,25 @@ class Level(object):
     def update(self,delta):
 
         self.time += delta
-
+        print "Time " +str(self.time)
+        print "Timekey " +str(list(self.timekeys))
+        
         # pop events as they occur
-        if not empty(self.timekeys):
+        if self.timekeys:
             if self.time >= self.timekeys[0]:
-                event = self.timeline.pop(str(self.time))
+                event = self.timeline.pop( str(self.timekeys[0]) )
+                print "Event at " + str(self.timekeys[0]) 
                 self.timekeys.pop(0)
                 
+                print event
                 # TODO: handle event here
-            
-        self.backgroundx -= self.speed/2
-        self.foregroundx -= self.speed
 
-        if self.backgroundx < -1*(self.bwidth):
-             self.backgroundx += self.bwidth
-        if self.foregroundx < -1*(self.fwidth):
-             self.foregroundx += self.fwidth
+        if self.time < self.duration:
+
+            self.backgroundx -= self.speed/2
+            self.foregroundx -= self.speed
+
+            if self.backgroundx < -1*(self.bwidth):
+                 self.backgroundx += self.bwidth
+            if self.foregroundx < -1*(self.fwidth):
+                 self.foregroundx += self.fwidth
