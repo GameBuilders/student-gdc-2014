@@ -12,16 +12,17 @@ class Level(object):
         self.time = 0
         self.speed = 2
 
-        imgdir = "assets"
+        directory = os.path.join("assets","levels")
              
         # create the parser
         parser = ConfigParser.ConfigParser()
-        parser.read(os.path.join("assets","levels","level" + str(levelnumber) + ".map"))
+        parser.read(os.path.join(directory,"level" + str(levelnumber) + ".map"))
 
 
         # define the foreground & background images
-        self.foreground = pygame.image.load(os.path.join(imgdir, parser.get("level", "front"))).convert()
-        self.background = pygame.image.load(os.path.join(imgdir, parser.get("level", "back"))).convert()
+        self.foreground = pygame.image.load(os.path.join(directory, parser.get("level", "front"))).convert_alpha()
+        self.background = pygame.image.load(os.path.join(directory, parser.get("level", "back"))).convert_alpha()
+        self.foreground.set_colorkey( pygame.Color('red') )
         self.foregroundx = 0
         self.backgroundx = 0
         self.fwidth = self.foreground.get_width()
@@ -54,6 +55,7 @@ class Level(object):
         screen.blit(self.background, (self.backgroundx+self.bwidth,0))
         screen.blit(self.foreground, (self.foregroundx,0))
         screen.blit(self.foreground, (self.foregroundx+self.fwidth,0))
+        pass
 
     def update(self,delta):
 
