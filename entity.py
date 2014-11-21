@@ -29,7 +29,7 @@ class Entity():
                 # Kill the player!
                 player.die()
 
-            if self.type == 3:#Chasing spike.
+            if self.type == 3 or self.type == 1:#Chasing spike or bat.
                 difference = player.position[1] - 50 - self.y
                 self.y += delta * 90 * (1 if difference > 10 else (-1 if difference < -10 else 0))
             
