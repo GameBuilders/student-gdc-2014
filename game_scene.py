@@ -47,7 +47,7 @@ class GameScene(Scene):
             obstacle.render(screen)
             
         # Render normal state
-        for i in range(len(self.player.pidgeons)):
+        for i in range(len(self.player.pidgeons) - 1):
             self.cd_icon[i].render(screen)
 
         self.player.render()
@@ -116,5 +116,5 @@ class GameScene(Scene):
 
         self.ProgressBar.update(delta)
         
-        for i in range(len(self.player.pidgeons)):
+        for i in range(len(self.player.pidgeons) - 1):
             self.cd_icon[i].update(delta)
