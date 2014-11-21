@@ -2,8 +2,9 @@ import pygame
 from config import *
 
 class Enemy():
-    def __init__(self, spritesheet, y):
+    def __init__(self, spritesheet, y, bullet):
         self.spritesheet = spritesheet
+        self.bullet = bullet
         self.x = Config.WIDTH + 64
         self.y = y
         
@@ -11,12 +12,24 @@ class Enemy():
         self.frame_time = 1.0 / 12.0
         
         self.health = 100
+        self.damage = 100
+        self.texture = sprite_b0
+        
+        self.fire_rate = 0.5
+        self.fire_timer = self.fire_rate
     
     def render(self, screen):
         sprite = self.spritesheet.get_sprite(self.frame)
         screen.blit(sprite, (self.x, self.y))
     
-    def update(self, delta, player):
+    def update(self, delta, player, game_scene):
+        self.fire_timer -= delta
+        if self.fire_timer <= 0:
+            self.fire_timer += self.fire_rate
+            
+            # Add a projectile
+            game_scene.enemy_projectiles.append(Projectile(self.x, self.y, -400.0, 0.0, 100, self.bullet))
+    
         self.frame_time -= delta
         if self.frame_time <= 0:
             self.frame_time += 1.0 / 12.0
