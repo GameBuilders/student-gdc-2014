@@ -5,10 +5,15 @@ import json
 import os
 import config
 from entity import *
+from enemy import *
+from spritesheet import *
 
 class Level(object):
     def __init__(self, levelnumber):
 
+        self.spritesheet = Spritesheet(os.path.join('assets', 'pidgeon_anim.png'), 64, 64)
+
+    
         # counter
         self.time = 0
         self.speed = Config.SCROLL_SPEED
@@ -78,11 +83,10 @@ class Level(object):
                     # Obstacle
                     obs = Entity(obstacle['sprite'], Config.WIDTH + 32, int(event_list[1]))
                     game_scene.obstacles.append(obs)
-                    
-                    pass
                 elif obstacle['type'] == '1':
-                    #Enemy
-                    pass
+                    # Enemy
+                    enemy = Enemy(self.spritesheet, int(event_list[1]))
+                    game_scene.enemies.append(enemy)
                 
                 print obstacle
                 

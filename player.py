@@ -18,11 +18,6 @@ class Player():
         self.stun = -1
         self.alpha = 255.0
     
-    # Sets the control scheme for this player.
-    def set_controls(self):
-        pass
-        #self.control_forward = 
-    
     def get_rect(self):
         return pygame.Rect(self.position[0], self.position[1], 64, 64)
     

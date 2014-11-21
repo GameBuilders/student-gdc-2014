@@ -56,6 +56,9 @@ class GameScene(Scene):
 
         for obstacle in self.obstacles:
             obstacle.render(screen)
+        
+        for enemy in self.enemies:
+            enemy.render(screen)
             
         # Render normal state
         for i in range(len(self.player.pidgeons) - 1):
@@ -152,6 +155,19 @@ class GameScene(Scene):
             
             for obstacle in obstacles_to_remove:
                 self.obstacles.remove(obstacle)
+                
+            # update enemies
+            enemies_to_remove = []
+            for enemy in self.enemies:
+                # Make enemy move to match map scrolling speed
+                enemy.x -= Config.SCROLL_SPEED * delta
+                enemy.update(delta, self.player)
+                
+                if enemy.x < -50:
+                    enemies_to_remove.append(enemy)
+            
+            for enemy in enemies_to_remove:
+                self.enemies.remove(enemy)
 
             self.ProgressBar.update(delta)
         
