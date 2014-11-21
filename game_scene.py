@@ -21,10 +21,7 @@ class GameScene(Scene):
         self.player_projectiles = []
         self.player_projectile_cooldown = 0.5
 
-        self.cooldownicon  = CooldownIcon(0)
-        self.cooldownicon2 = CooldownIcon(1)
-        self.cooldownicon3 = CooldownIcon(2)
-        self.cooldownicon4 = CooldownIcon(3)
+        self.cd_icon = [CooldownIcon(0), CooldownIcon(1), CooldownIcon(2), CooldownIcon(3)]
 
         self.lives_sprite= pygame.image.load('assets/heart.png')
         self.lives_rect= self.lives_sprite.get_rect()
@@ -50,10 +47,9 @@ class GameScene(Scene):
             obstacle.render(screen)
             
         # Render normal state
-        self.cooldownicon.render(screen)
-        self.cooldownicon2.render(screen)
-        self.cooldownicon3.render(screen)
-        self.cooldownicon4.render(screen)
+        for i in range(len(self.player.pidgeons) - 1):
+            self.cd_icon[i].render(screen)
+
         self.player.render()
         self.ProgressBar.render(screen)
 
@@ -63,7 +59,8 @@ class GameScene(Scene):
 
         # render game over screen
         if (self.player.lives > 0):
-          
+            pass
+
     # Updates the scene according to the time passed since last update.
     def update(self, delta):
 
@@ -72,7 +69,6 @@ class GameScene(Scene):
             self.level.update(delta, self)
             self.player.update(delta)
             self.player_projectile_cooldown -= delta
-
             bullettype = self.player.status
 
             cap = 0.3
@@ -105,8 +101,6 @@ class GameScene(Scene):
                     self.player_projectiles.append(Projectile(self.player.position[0]+60, self.player.position[1]+32, 600.0, -150.0, self.sprite_bullet))
                     self.player_projectiles.append(Projectile(self.player.position[0]+60, self.player.position[1]+32, 600.0, -300.0, self.sprite_bullet))
 
-
-
             # update projectiles
             for p in self.player_projectiles:
                 p.update(delta)
@@ -128,9 +122,6 @@ class GameScene(Scene):
                 self.obstacles.remove(obstacle)
 
             self.ProgressBar.update(delta)
-            self.cooldownicon.update(delta)
-            self.cooldownicon2.update(delta)
-            self.cooldownicon3.update(delta)
-            self.cooldownicon4.update(delta)
-
-
+        
+            for i in range(len(self.player.pidgeons) - 1):
+                self.cd_icon[i].update(delta)
