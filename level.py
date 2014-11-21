@@ -44,11 +44,9 @@ class Level(object):
         self.timekeys = []
         for item in self.timeline:
             self.timekeys.append(int(item[0]))
-
-        # pop events as they occur
+        self.timekeys.sort()
+        
         self.timeline = dict(self.timeline)
-        if self.time in self.timekeys:
-            self.timeline.pop(str(self.time))
         
     def render(self,screen):
 
@@ -61,6 +59,14 @@ class Level(object):
 
         self.time += delta
 
+        # pop events as they occur
+        if not empty(self.timekeys):
+            if self.time >= self.timekeys[0]:
+                event = self.timeline.pop(str(self.time))
+                self.timekeys.pop(0)
+                
+                # TODO: handle event here
+            
         self.backgroundx -= self.speed/2
         self.foregroundx -= self.speed
 
