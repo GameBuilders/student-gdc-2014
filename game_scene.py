@@ -66,18 +66,38 @@ class GameScene(Scene):
         self.level.update(delta, self)
         self.player.update(delta)
         self.player_projectile_cooldown -= delta
+
+        bullettype = self.player.status
+
+        cap = 0.3
+        if bullettype == 0:
+            cap = 0.3
+        if bullettype == 1:
+            cap = 0.2
+        if bullettype == 2:
+            cap = 0.5
+        if bullettype == 3:
+            cap = 0.2
+        if bullettype == 4:
+            cap = 0.5
+
+        # if you can shoot
         if (self.player_projectile_cooldown < 0.0):
-            self.player_projectile_cooldown = 0.2
+            self.player_projectile_cooldown = cap
 
             # attack patterns
             if self.player.status == 0:
-                self.player_projectiles.append(Projectile(self.player.position[0]+60, self.player.position[1]+32, 400.0, 0.0, self.sprite_bullet))
+                self.player_projectiles.append(Projectile(self.player.position[0]+60, self.player.position[1]+28, 400.0, 0.0, self.sprite_bullet))
+                self.player_projectiles.append(Projectile(self.player.position[0]+60, self.player.position[1]+36, 400.0, 0.0, self.sprite_bullet))
             if self.player.status == 1:
                 self.player_projectiles.append(Projectile(self.player.position[0]+60, self.player.position[1]+32, 400.0, 200.0, self.sprite_bullet))
                 self.player_projectiles.append(Projectile(self.player.position[0]+60, self.player.position[1]+32, 400.0, -200.0, self.sprite_bullet))
             if self.player.status == 2:
-                self.player_projectiles.append(Projectile(self.player.position[0]+60, self.player.position[1]+32, 400.0, 600.0, self.sprite_bullet))
-                self.player_projectiles.append(Projectile(self.player.position[0]+60, self.player.position[1]+32, 400.0, -600.0, self.sprite_bullet))
+                self.player_projectiles.append(Projectile(self.player.position[0]+60, self.player.position[1]+32, 600.0, 150.0, self.sprite_bullet))
+                self.player_projectiles.append(Projectile(self.player.position[0]+60, self.player.position[1]+32, 600.0, 0.0, self.sprite_bullet))
+                self.player_projectiles.append(Projectile(self.player.position[0]+60, self.player.position[1]+32, 600.0, 300.0, self.sprite_bullet))
+                self.player_projectiles.append(Projectile(self.player.position[0]+60, self.player.position[1]+32, 600.0, -150.0, self.sprite_bullet))
+                self.player_projectiles.append(Projectile(self.player.position[0]+60, self.player.position[1]+32, 600.0, -300.0, self.sprite_bullet))
 
 
 
