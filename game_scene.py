@@ -13,13 +13,17 @@ class GameScene(Scene):
         # Call the base class's constructor
         self.player = Player()
         Scene.__init__(self, game)
-        
+        self.lives = 3
+        self.lives_sprite= pygame.image.load('assets/heart.png')
+        self.lives_rect= self.lives_sprite.get_rect()
     # Renders the scene according to its current state.
     def render(self, screen):
         # Render normal state
         
         self.player.render()
         self.ProgressBar.render(screen)
+        for i in range(self.lives):
+            screen.blit(self.lives_sprite,(10+self.lives_rect.left+(i*40),50))
 
         # Render How to Play state
         
