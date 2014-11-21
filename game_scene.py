@@ -122,15 +122,15 @@ class GameScene(Scene):
                 cap = 0.2
                 damage = 50
                 sprite = self.sprite_b1
-            if bullettype == 2:
+            elif bullettype == 2:
                 cap = 0.5
                 damage = 15
                 sprite = self.sprite_b2
-            if bullettype == 3:
+            elif bullettype == 3:
                 cap = 0.2
                 damage = 30
                 sprite = self.sprite_b3
-            if bullettype == 4:
+            elif bullettype == 4:
                 cap = 0.1
                 damage = 50
                 sprite = self.sprite_b4
@@ -178,11 +178,13 @@ class GameScene(Scene):
                 if (p.x > Config.WIDTH or p.y > Config.HEIGHT or p.y < 0.0):
                     self.enemy_projectiles.remove(p)
 
+
             # update obstacles
             obstacles_to_remove = []
             for obstacle in self.obstacles:
                 # Make obstacle move to match map scrolling speed
-                obstacle.x -= Config.SCROLL_SPEED * delta
+                if self.level.time <= self.level.duration:
+                    obstacle.x -= Config.SCROLL_SPEED * delta
                 obstacle.update(delta, self.player)
                 
                 if obstacle.x < -50:
@@ -195,7 +197,8 @@ class GameScene(Scene):
             enemies_to_remove = []
             for enemy in self.enemies:
                 # Make enemy move to match map scrolling speed
-                enemy.x -= Config.SCROLL_SPEED * delta
+                if self.level.time <= self.level.duration:
+                    enemy.x -= Config.SCROLL_SPEED * delta
                 should_remove = enemy.update(delta, self.player, self)
                 
                 if enemy.x < -50 or should_remove:
@@ -205,6 +208,7 @@ class GameScene(Scene):
                 self.enemies.remove(enemy)
 
             self.ProgressBar.update(delta)
-        
+            
+            # update special attack icons
             for i in range(len(self.player.pidgeons) - 1):
                 self.cd_icon[i].update(delta)
