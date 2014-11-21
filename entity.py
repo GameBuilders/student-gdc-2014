@@ -1,4 +1,5 @@
 import pygame
+import math
 from config import *
 
 # Entity class. Keeps track of everything we need to know about an entity.
@@ -11,6 +12,11 @@ class Entity():
         self.y = y
         self.state = 0
         self.type = t
+        if (self.type == 4):#spiraling spike
+            self.center_x = x
+            self.center_y = y
+            self.radius = 0
+            self.radians = 0
         
     
     # Render the entity.
@@ -29,10 +35,15 @@ class Entity():
                 # Kill the player!
                 player.die()
 
-            if self.type == 3:#Chasing spike.
+            if self.type == 3 or self.type == 1:#Chasing spike or bat.
                 difference = player.position[1] - 50 - self.y
                 self.y += delta * 90 * (1 if difference > 10 else (-1 if difference < -10 else 0))
-            
+            if self.type ==  4:#spiraling spike
+                self.center_x -= Config.SCROLL_SPEED * delta
+                self.radius += delta * 30
+                self.radians += delta * math.pi / self.radius * 120
+                self.x = self.center_x + self.radius * math.cos(self.radians)
+                self.y = self.center_y + self.radius * math.sin(self.radians)
             # Check for player projectiles
             proj_to_remove = []
             for proj in player.projectiles:
