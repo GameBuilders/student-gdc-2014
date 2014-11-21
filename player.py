@@ -1,6 +1,7 @@
 import pygame
 from pidgeon import *
 from config import *
+from sound import *
 
 # Player class. Keeps track of everything we need to know about a player.
 class Player():
@@ -30,6 +31,7 @@ class Player():
         if not self.dead and (self.stun == -1):
             print "Player died!"
             self.lives -= 1
+            play_sound('assets/sounds/pidgeon_dying.wav')
             self.dead = True
     
     # Render the current state of the player.

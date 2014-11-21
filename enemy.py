@@ -1,10 +1,8 @@
 import pygame
 from config import *
-from entity import *
 
-class Enemy(Entity):
-
-    def __init__(self, sprite, y):
+class Enemy():
+    def __init__(self, spritesheet, y):
 
         x = Config.WIDTH + 32
         self.speed = 200

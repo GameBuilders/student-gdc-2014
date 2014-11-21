@@ -9,8 +9,12 @@ class Spritesheet():
         self.num_cols = self.sheet.get_width() / self.sprite_width
         self.num_rows = self.sheet.get_height() / self.sprite_height
         
+        self.sprites = []
+        for i in range(self.num_cols * self.num_rows - 1):
+            self.sprites.append(self.get_sprite_internal(i))
+        
     # Returns the sprite at the given frame index.
-    def get_sprite(self, idx):
+    def get_sprite_internal(self, idx):
         x_idx = idx % self.num_cols
         y_idx = math.floor(idx / self.num_cols)
         start_x = x_idx * self.sprite_width
@@ -19,3 +23,6 @@ class Spritesheet():
         image = pygame.Surface((self.sprite_width, self.sprite_height), flags=pygame.SRCALPHA, depth=32).convert_alpha()
         image.blit(self.sheet, (0, 0), rect)
         return image
+        
+    def get_sprite(self, idx):
+        return self.sprites[idx]
