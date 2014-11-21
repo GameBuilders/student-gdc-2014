@@ -9,14 +9,14 @@ def main():
 
     clock = pygame.time.Clock()
 
-    game = Game()
-
     # Create the window
     size = (1024, 768)
     screen = pygame.display.set_mode(size)
 
     # Set the window title
     pygame.display.set_caption("Student GDC")
+
+    game = Game()
 
     # Main game loop
     while game.running:
