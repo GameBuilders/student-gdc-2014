@@ -11,9 +11,9 @@ class GameScene(Scene):
     # Scene constructor. Receives a Game reference.
     def __init__(self, game):
         # game scene
+        self.game = game
         
         # State of the game. 0 = normal, 1 = how to play
-        
         self.state = 0
         
         # Call the base class's constructor
@@ -64,6 +64,8 @@ class GameScene(Scene):
     # Updates the scene according to the time passed since last update.
     def update(self, delta):
 
+        if (self.player.lives is 2):
+            self.__init__(self.game)
         if (self.player.lives > 0):
 
             self.level.update(delta, self)
