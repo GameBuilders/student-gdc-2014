@@ -1,6 +1,7 @@
 import pygame
 from config import *
 from projectile import *
+from sound import *
 
 class Enemy():
     def __init__(self, spritesheet, y, bullet):
@@ -54,5 +55,6 @@ class Enemy():
             player.projectiles.remove(proj)
             
         if self.health <= 0:
+            play_sound('assets/sounds/enemy_death.wav')
             return True #true = remove me
         return False
