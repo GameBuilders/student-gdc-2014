@@ -13,6 +13,8 @@ class GameScene(Scene):
         # game scene
         self.game = game
         
+        self.counter = 0
+        
         # State of the game. 0 = normal, 1 = how to play
         self.state = 0
         
@@ -24,6 +26,13 @@ class GameScene(Scene):
 
         self.cd_icon = [CooldownIcon(0), CooldownIcon(1), CooldownIcon(2), CooldownIcon(3)]
 
+        self.rescue_banner = pygame.image.load('assets/rescue.png')
+        
+        self.red_get = pygame.image.load('assets/red_get.png')
+        self.blue_get = pygame.image.load('assets/blue_get.png')
+        self.purple_get = pygame.image.load('assets/purple_get.png')
+        self.gold_get = pygame.image.load('assets/gold_get.png')
+        
         self.lives_sprite= pygame.image.load('assets/heart.png')
         self.lives_rect= self.lives_sprite.get_rect()
         self.level = Level(self.game.num_pigeons)
@@ -75,6 +84,10 @@ class GameScene(Scene):
         for i in range(self.player.lives):
             screen.blit(self.lives_sprite,(10+self.lives_rect.left+(i*40),50))
 
+        #rescue banner
+        if self.counter < 5:
+            screen.blit(self.rescue_banner, (Config.WIDTH / 2 - self.rescue_banner.get_width() / 2, 200))
+        
         # render game over screen
         if (self.player.lives <= 0):
             
@@ -92,7 +105,8 @@ class GameScene(Scene):
 
     # Updates the scene according to the time passed since last update.
     def update(self, delta):
-
+        self.counter += delta
+        
         #if (self.player.lives is 2):
         #    self.__init__(self.game)
         if self.player.lives is 0:

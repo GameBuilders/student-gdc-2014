@@ -17,7 +17,7 @@ def main():
     # Set the window title
     pygame.display.set_caption("Pigeon Rangers")
 
-    music = pygame.mixer.Sound(os.path.join('assets','sounds','muzak.wav'))  #load music
+    music = pygame.mixer.Sound(os.path.join('assets','sounds','muzakfinal.ogg'))  #load music
     music.play(-1)
     
     game = Game()
