@@ -5,6 +5,7 @@ from game import *
 
 def main():
     # Initialize Pygame
+    pygame.mixer.pre_init(44100, -16, 2, 2048) # setup mixer to avoid sound lag
     pygame.init()
 
     clock = pygame.time.Clock()
@@ -16,6 +17,9 @@ def main():
     # Set the window title
     pygame.display.set_caption("Pigeon Rangers")
 
+    music = pygame.mixer.Sound(os.path.join('assets','sounds','muzak.wav'))  #load music
+    music.play(-1)
+    
     game = Game()
 
     # Main game loop
