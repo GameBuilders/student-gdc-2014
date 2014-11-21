@@ -1,6 +1,7 @@
 from scene import *
 from config import *
 from player import *
+from projectile import *
 # A scene sub-class that represents the game.
 class GameScene(Scene):
     # Scene constructor. Receives a Game reference.
@@ -12,21 +13,36 @@ class GameScene(Scene):
         self.ProgressBar = ProgressBar(None)
         # Call the base class's constructor
         self.player = Player()
+        self.player_projectiles = []
+        self.player_projectile_cooldown = 0.5
         Scene.__init__(self, game)
         
     # Renders the scene according to its current state.
     def render(self, screen):
-        # Render normal state
+
+        # render player projectiles
+        for p in self.player_projectiles:
+            p.render(screen)
         
         self.player.render()
         self.ProgressBar.render(screen)
-
-        # Render How to Play state
         
           
     # Updates the scene according to the time passed since last update.
     def update(self, delta):
         self.player.update(delta)
+
+        self.player_projectile_cooldown -= delta
+        if (self.player_projectile_cooldown < 0.0):
+            self.player_projectile_cooldown = 0.5
+            self.player_projectiles.append(Projectile(self.player.position[0], self.player.position[1], 400.0, 0.0))
+
+        # update projectiles
+        for p in self.player_projectiles:
+            p.update(delta)
+            # remove projectiles that are off screen
+            if (p.x > Config.WIDTH or p.y > Config.HEIGHT or p.y < 0.0):
+                self.player_projectiles.remove(p)
 
 class ProgressBar():
     
