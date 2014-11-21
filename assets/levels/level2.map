@@ -27,7 +27,7 @@ boxdr	= (20,190)
 
 [o_bird]
 type	= -1
-img		= assets/1.png
+img   = assets/Dead pigeons/blue.png
 boxul	= (10,10)
 boxdr	= (54,54)
 

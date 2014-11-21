@@ -1,0 +1,77 @@
+# PRIMARY LEVEL DETAILS
+
+[level]
+front		= level1_foreground.png
+back		= level1_background.png
+duration	= 17000
+
+# OBSTACLE/ENEMY LIST
+
+[o_spikelow]
+type	= 0
+img 	= assets/spike_obstacle.png
+boxul	= (10,10)
+boxdr	= (20,190)
+
+[o_bat]
+type	= 1
+img 	= assets/spike_obstacle.png
+boxul	= (10,10)
+boxdr	= (20,190)
+
+[o_spikechasing]
+type	= 3
+img 	= assets/moving_spike_obstacle.png
+boxul	= (10,10)
+boxdr	= (20,190)
+
+[o_spikespiral]
+type	= 4
+img 	= assets/spiral_spike_obstacle.png
+boxul	= (10,10)
+boxdr	= (20,190)
+
+[o_bird]
+type	= -1
+img   = assets/Dead pigeons/yellow.png
+boxul	= (10,10)
+boxdr	= (54,54)
+
+# TIMELINE OF EVENTS
+
+[events]
+#1000		= o_bat,200
+1200		= o_bat,160
+#1400		= o_bat,120
+1600		= o_bat,80
+#1800		= o_bat,40
+2000		= o_bat,400
+#2200		= o_bat,360
+2400		= o_bat,320
+4000		= o_bat,0
+#4200		= o_bat,0
+4400		= o_bat,0
+#4600		= o_bat,0
+4800		= o_bat,0
+4001		= o_bat,700
+#4202		= o_bat,700
+4403		= o_bat,700
+#4604		= o_bat,700
+4805		= o_bat,700
+5000		= o_spikespiral, 0
+5500		= o_spikespiral, 100
+6000		= o_spikespiral, 700
+6500		= o_spikespiral, 600
+7000		= o_spikespiral, 0
+7500		= o_spikespiral, 100
+8000		= o_spikespiral, 700
+8500		= o_spikespiral, 600
+9000		= o_spikespiral, 100
+9500		= o_spikespiral, 200
+10000		= o_spikespiral, 600
+10500		= o_spikespiral, 500
+9000		= o_spikespiral, 200
+9500		= o_spikespiral, 300
+10000		= o_spikespiral, 500
+10500		= o_spikespiral, 400
+15000		= o_bird, 400
