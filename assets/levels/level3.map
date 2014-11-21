@@ -1,0 +1,76 @@
+# PRIMARY LEVEL DETAILS
+
+[level]
+front		= level1_foreground.png
+back		= level1_background.png
+duration	= 40000
+
+# OBSTACLE/ENEMY LIST
+
+[o_spikelow]
+type	= 0
+img 	= assets/spike_obstacle.png
+boxul	= (10,10)
+boxdr	= (20,190)
+
+[o_bat]
+type	= 1
+img 	= assets/spike_obstacle.png
+boxul	= (10,10)
+boxdr	= (20,190)
+
+[o_spikechasing]
+type	= 3
+img 	= assets/moving_spike_obstacle.png
+boxul	= (10,10)
+boxdr	= (20,190)
+
+[o_spikespiral]
+type	= 4
+img 	= assets/spiral_spike_obstacle.png
+boxul	= (10,10)
+boxdr	= (20,190)
+
+[o_bird]
+type	= -1
+img		= assets/1.png
+boxul	= (10,10)
+boxdr	= (54,54)
+
+# TIMELINE OF EVENTS
+
+[events]
+1000		= o_bat,200
+#1200		= o_bat,160
+1400		= o_bat,120
+#1600		= o_bat,80
+1800		= o_bat,40
+#2000		= o_bat,400
+2200		= o_bat,360
+#2400		= o_bat,320
+2600		= o_bat,280
+#2800		= o_bat,240
+3000		= o_spikespiral,500
+
+5000		= o_spikespiral,200
+6000		= o_spikespiral,500
+9000		= o_spikespiral,0
+12000		= o_spikespiral,300
+13000		= o_spikespiral,100
+14000		= o_spikespiral,700
+21000		= o_bat,500
+#21200		= o_bat,560
+21400		= o_bat,520
+#21600		= o_bat,50
+21800		= o_bat,50
+#22000		= o_bat,500
+22200		= o_bat,560
+#22400		= o_bat,520
+22600		= o_bat,580
+#22800		= o_bat,540
+26000		= o_spikechasing,850
+27000		= o_spikechasing,850
+28000		= o_spikechasing,-150
+29000		= o_spikechasing,-150
+30000		= o_spikechasing,850
+31000		= o_spikechasing,850
