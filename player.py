@@ -23,7 +23,7 @@ class Player():
         self.alpha = 255.0
     
     def get_rect(self):
-        return pygame.Rect(self.position[0], self.position[1], 64, 64)
+        return pygame.Rect(self.position[0]+12, self.position[1]+12, 40, 40)
     
     # Kill the player!
     def die(self):
