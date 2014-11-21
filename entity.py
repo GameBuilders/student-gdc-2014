@@ -24,3 +24,11 @@ class Entity():
         if rect.colliderect(player.get_rect()):
             # Kill the player!
             player.die()
+        
+        # Check for player projectiles
+        proj_to_remove = []
+        for proj in player.projectiles:
+            if rect.collidepoint(proj.x, proj.y):
+                proj_to_remove.append(proj)
+        for proj in proj_to_remove:
+            player.projectiles.remove(proj)

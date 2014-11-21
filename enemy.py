@@ -9,6 +9,8 @@ class Enemy():
         
         self.frame = 40
         self.frame_time = 1.0 / 12.0
+        
+        self.health = 100
     
     def render(self, screen):
         sprite = self.spritesheet.get_sprite(self.frame)
@@ -26,3 +28,16 @@ class Enemy():
         if rect.colliderect(player.get_rect()):
             # Kill the player!
             player.die()
+        
+        # Check for player projectiles
+        proj_to_remove = []
+        for proj in player.projectiles:
+            if rect.collidepoint(proj.x, proj.y):
+                proj_to_remove.append(proj)
+                self.health -= proj.damage
+        for proj in proj_to_remove:
+            player.projectiles.remove(proj)
+            
+        if self.health <= 0:
+            return True #true = remove me
+        return False
