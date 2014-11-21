@@ -32,7 +32,13 @@ class GameScene(Scene):
         self.obstacles = []
 
         # sprite initialization
-        self.sprite_bullet = pygame.image.load(os.path.join('assets','projectile.png'))
+        directory = os.path.join('assets','projectiles')
+        self.sprite_b0 = pygame.image.load(os.path.join(directory,'gray.png'))
+        self.sprite_b1 = pygame.image.load(os.path.join(directory,'red.png'))
+        self.sprite_b2 = pygame.image.load(os.path.join(directory,'blue.png'))
+        self.sprite_b3 = pygame.image.load(os.path.join(directory,'purple.png'))
+        self.sprite_b4 = pygame.image.load(os.path.join(directory,'jesus.png'))
+
         Scene.__init__(self, game)
 
         # game over alpha
@@ -97,7 +103,7 @@ class GameScene(Scene):
             if bullettype == 3:
                 cap = 0.2
             if bullettype == 4:
-                cap = 0.5
+                cap = 0.1
 
             # if you can shoot
             if (self.player_projectile_cooldown < 0.0):
@@ -105,17 +111,20 @@ class GameScene(Scene):
 
                 # attack patterns
                 if bullettype == 0:
-                    self.player_projectiles.append(Projectile(self.player.position[0]+60, self.player.position[1]+28, 400.0, 0.0, self.sprite_bullet))
-                    self.player_projectiles.append(Projectile(self.player.position[0]+60, self.player.position[1]+36, 400.0, 0.0, self.sprite_bullet))
+                    self.player_projectiles.append(Projectile(self.player.position[0]+60, self.player.position[1]+32, 400.0, 0.0, self.sprite_b0))
                 if bullettype == 1:
-                    self.player_projectiles.append(Projectile(self.player.position[0]+60, self.player.position[1]+32, 400.0, 200.0, self.sprite_bullet))
-                    self.player_projectiles.append(Projectile(self.player.position[0]+60, self.player.position[1]+32, 400.0, -200.0, self.sprite_bullet))
+                    self.player_projectiles.append(Projectile(self.player.position[0]+60, self.player.position[1]+32, 400.0, 200.0, self.sprite_b1))
+                    self.player_projectiles.append(Projectile(self.player.position[0]+60, self.player.position[1]+32, 400.0, -200.0, self.sprite_b1))
                 if bullettype == 2:
-                    self.player_projectiles.append(Projectile(self.player.position[0]+60, self.player.position[1]+32, 600.0, 150.0, self.sprite_bullet))
-                    self.player_projectiles.append(Projectile(self.player.position[0]+60, self.player.position[1]+32, 600.0, 0.0, self.sprite_bullet))
-                    self.player_projectiles.append(Projectile(self.player.position[0]+60, self.player.position[1]+32, 600.0, 300.0, self.sprite_bullet))
-                    self.player_projectiles.append(Projectile(self.player.position[0]+60, self.player.position[1]+32, 600.0, -150.0, self.sprite_bullet))
-                    self.player_projectiles.append(Projectile(self.player.position[0]+60, self.player.position[1]+32, 600.0, -300.0, self.sprite_bullet))
+                    self.player_projectiles.append(Projectile(self.player.position[0]+60, self.player.position[1]+32, 600.0, 150.0, self.sprite_b2))
+                    self.player_projectiles.append(Projectile(self.player.position[0]+60, self.player.position[1]+32, 600.0, 0.0, self.sprite_b2))
+                    self.player_projectiles.append(Projectile(self.player.position[0]+60, self.player.position[1]+32, 600.0, 300.0, self.sprite_b2))
+                    self.player_projectiles.append(Projectile(self.player.position[0]+60, self.player.position[1]+32, 600.0, -150.0, self.sprite_b2))
+                    self.player_projectiles.append(Projectile(self.player.position[0]+60, self.player.position[1]+32, 600.0, -300.0, self.sprite_b2))
+                if bullettype == 3:
+                    self.player_projectiles.append(Projectile(self.player.position[0]+60, self.player.position[1]+16, 400.0, 0.0, self.sprite_b3))
+                if bullettype == 4:
+                    self.player_projectiles.append(Projectile(self.player.position[0]+60, self.player.position[1]+32, 400.0, 0.0, self.sprite_b4))
 
             # update projectiles
             for p in self.player_projectiles:
