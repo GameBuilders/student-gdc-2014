@@ -15,7 +15,7 @@ class GameScene(Scene):
         # State of the game. 0 = normal, 1 = how to play
         
         self.state = 0
-        self.ProgressBar = ProgressBar(None)
+        
         # Call the base class's constructor
         self.player = Player()
         self.player_projectiles = []
@@ -31,6 +31,7 @@ class GameScene(Scene):
         self.lives_sprite= pygame.image.load('assets/heart.png')
         self.lives_rect= self.lives_sprite.get_rect()
         self.level = Level(1)
+        self.ProgressBar = ProgressBar(self.level)
 
     # Renders the scene according to its current state.
     def render(self, screen):
