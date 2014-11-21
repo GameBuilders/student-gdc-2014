@@ -9,16 +9,16 @@ duration	= 150
 
 [o_spikelow]
 type	= 0
-img 	= images/level1_obs_spikelow.png
+img 	= assets/spike_obstacle.png
 boxul	= (10,10)
 boxdr = (20,190)
 
 # TIMELINE OF EVENTS
 
 [events]
-10 		= [o_spikelow, 500]
-50 		= [o_spikelow, 100]
-20 		= [o_spikelow, 300]
-30 		= [o_spikelow, 400]
-60 		= [o_spikelow, 200]
-40 		= [o_spikelow, 600]
+10 		= o_spikelow,500
+50 		= o_spikelow,100
+30 		= o_spikelow,400
+60 		= o_spikelow,200
+20 		= o_spikelow,300
+40 		= o_spikelow,600

@@ -26,13 +26,17 @@ class GameScene(Scene):
         self.cooldownicon3 = CooldownIcon(2)
         self.cooldownicon4 = CooldownIcon(3)
 
-        Scene.__init__(self, game)
         self.lives = 3
         self.lives_sprite= pygame.image.load('assets/heart.png')
         self.lives_rect= self.lives_sprite.get_rect()
         self.level = Level(1)
         self.ProgressBar = ProgressBar(self.level)
+        
+        self.enemies = []
+        self.obstacles = []
 
+        Scene.__init__(self, game)
+        
     # Renders the scene according to its current state.
     def render(self, screen):
 
@@ -41,6 +45,9 @@ class GameScene(Scene):
         for p in self.player_projectiles:
             p.render(screen)
 
+        for obstacle in self.obstacles:
+            obstacle.render(screen)
+            
         # Render normal state
         self.cooldownicon.render(screen)
         self.cooldownicon2.render(screen)
@@ -55,7 +62,7 @@ class GameScene(Scene):
           
     # Updates the scene according to the time passed since last update.
     def update(self, delta):
-        self.level.update(delta)
+        self.level.update(delta, self)
         self.player.update(delta)
         self.player_projectile_cooldown -= delta
         if (self.player_projectile_cooldown < 0.0):
@@ -69,6 +76,18 @@ class GameScene(Scene):
             if (p.x > Config.WIDTH or p.y > Config.HEIGHT or p.y < 0.0):
                 self.player_projectiles.remove(p)
 
+        # update obstacles
+        obstacles_to_remove = []
+        for obstacle in self.obstacles:
+            # Make obstacle move to match map scrolling speed
+            obstacle.x -= Config.SCROLL_SPEED * delta
+            obstacle.update(delta)
+            
+            if obstacle.x < -50:
+                obstacles_to_remove.append(obstacle)
+        
+        for obstacle in obstacles_to_remove:
+            self.obstacles.remove(obstacle)
 
         self.ProgressBar.update(delta)
         self.cooldownicon.update(delta)
