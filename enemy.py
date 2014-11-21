@@ -1,5 +1,6 @@
 import pygame
 from config import *
+from projectile import *
 
 class Enemy():
     def __init__(self, spritesheet, y, bullet):
@@ -13,7 +14,6 @@ class Enemy():
         
         self.health = 100
         self.damage = 100
-        self.texture = sprite_b0
         
         self.fire_rate = 0.5
         self.fire_timer = self.fire_rate
