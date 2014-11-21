@@ -4,13 +4,14 @@ import pygame.locals
 import json
 import os
 import config
+from entity import *
 
 class Level(object):
     def __init__(self, levelnumber):
 
         # counter
         self.time = 8
-        self.speed = 2
+        self.speed = Config.SCROLL_SPEED
 
         directory = os.path.join("assets","levels")
              
@@ -36,9 +37,10 @@ class Level(object):
         self.obstaclelist = [s for s in self.sections if 'o_' in s]
 
         # store individual obstacle attributes
-        self.obstacle = []
+        self.obstacle = dict()
         for item in self.obstaclelist:
-            self.obstacle.append(parser._sections[item])
+            self.obstacle[item] = parser._sections[item]
+            self.obstacle[item]['sprite'] = pygame.image.load(self.obstacle[item]['img'])
 
         # construct the timeline of events
         self.timeline = parser.items('events')
@@ -58,7 +60,7 @@ class Level(object):
         screen.blit(self.foreground, (self.foregroundx+self.fwidth,0))
         pass
 
-    def update(self,delta):
+    def update(self,delta, game_scene):
 
         self.time += delta
         
@@ -66,18 +68,32 @@ class Level(object):
         if self.timekeys:
             if self.time >= self.timekeys[0]:
                 event = self.timeline.pop( str(self.timekeys[0]) )
-                print "Event at " + str(self.timekeys[0]) 
+                
+                event_list = event.split(",")
                 self.timekeys.pop(0)
+                
+                obstacle = self.obstacle[event_list[0]]
+                
+                if obstacle['type'] == '0':
+                    # Obstacle
+                    obs = Entity(obstacle['sprite'], Config.WIDTH + 32, int(event_list[1]))
+                    game_scene.obstacles.append(obs)
+                    
+                    pass
+                elif obstacle['type'] == '1':
+                    #Enemy
+                    pass
+                
+                print obstacle
                 
                 # event[0] contains the object name
                 # event[1] contains the y-coordinate at which it should be placed
-                print event
                 # TODO: handle event here
 
         if self.time < self.duration:
 
-            self.backgroundx -= self.speed/2
-            self.foregroundx -= self.speed
+            self.backgroundx -= self.speed * delta /2
+            self.foregroundx -= self.speed * delta
 
             if self.backgroundx < -1*(self.bwidth):
                  self.backgroundx += self.bwidth

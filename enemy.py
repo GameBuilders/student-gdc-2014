@@ -4,15 +4,12 @@ from entity import *
 
 class Enemy(Entity):
 
-    def __init__(self, my_y):
+    def __init__(self, sprite, y):
 
-        self.position = [Config.WIDTH + 32, my_y]
+        x = Config.WIDTH + 32
         self.speed = 200
+        
+        Entity.__init__(sprite, x, y)
     
-    def set_controls(self):
+    def update(self, delta, game_scene):
         pass
-    
-    def update(self, delta):
-        keys_pressed = pygame.key.get_pressed()
-
-        self.position
