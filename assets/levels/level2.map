@@ -1,0 +1,63 @@
+# PRIMARY LEVEL DETAILS
+
+[level]
+front		= level1_foreground.png
+back		= level1_background.png
+duration	= 50000
+
+# OBSTACLE/ENEMY LIST
+
+[o_spikelow]
+type	= 0
+img 	= assets/spike_obstacle.png
+boxul	= (10,10)
+boxdr	= (20,190)
+
+[o_bat]
+type	= 1
+img 	= assets/spike_obstacle.png
+boxul	= (10,10)
+boxdr	= (20,190)
+
+[o_spikechasing]
+type	= 3
+img 	= assets/moving_spike_obstacle.png
+boxul	= (10,10)
+boxdr	= (20,190)
+
+[o_bird]
+type	= -1
+img		= assets/1.png
+boxul	= (10,10)
+boxdr	= (54,54)
+
+# TIMELINE OF EVENTS
+
+[events]
+1000		= o_bat,200
+2000		= o_bat,160
+3000 	= o_bat,120
+4000		= o_bat,80
+5000		= o_bat,40
+6000	 	= o_spikelow,100
+7000	 	= o_spikechasing,0
+10000 		= o_spikelow,500
+15000 		= o_spikelow,200
+20000 		= o_spikelow,500
+21000		= o_bat,200
+22000		= o_bat,190
+23000		= o_bat,180
+24000	 	= o_spikechasing,400
+25000		= o_bat,170
+28000		= o_bat,160
+30000	 	= o_spikechasing,400
+31000 		= o_spikelow,300
+33000 		= o_spikelow,400
+36000		= o_bat,200
+37000		= o_bat,190
+38000	 	= o_spikechasing,500
+43000		= o_bat,180
+44000		= o_bat,170
+45000		= o_bat,160
+46000	 	= o_spikechasing,100
+48000		= o_bird,380

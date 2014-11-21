@@ -13,6 +13,8 @@ class GameScene(Scene):
         # game scene
         self.game = game
         
+        self.counter = 0
+        
         # State of the game. 0 = normal, 1 = how to play
         self.state = 0
         
@@ -24,9 +26,17 @@ class GameScene(Scene):
 
         self.cd_icon = [CooldownIcon(0), CooldownIcon(1), CooldownIcon(2), CooldownIcon(3)]
 
+        self.rescue_banner = pygame.image.load('assets/rescue.png')
+        
+        self.red_get = pygame.image.load('assets/red_get.png')
+        self.blue_get = pygame.image.load('assets/blue_get.png')
+        self.purple_get = pygame.image.load('assets/purple_get.png')
+        self.gold_get = pygame.image.load('assets/gold_get.png')
+        self.reset_pending = False
+        
         self.lives_sprite= pygame.image.load('assets/heart.png')
         self.lives_rect= self.lives_sprite.get_rect()
-        self.level = Level(1)
+        self.level = Level(self.game.num_pigeons)
         self.ProgressBar = ProgressBar(self.level)
         
         self.enemies = []
@@ -75,6 +85,19 @@ class GameScene(Scene):
         for i in range(self.player.lives):
             screen.blit(self.lives_sprite,(10+self.lives_rect.left+(i*40),50))
 
+        #rescue banner
+        if self.counter < 0:
+            get_sprite = self.red_get
+            if self.game.num_pigeons is 2:
+                get_sprite = self.blue_get
+            elif self.game.num_pigeons is 3:
+                get_sprite = self.purple_get
+            elif self.game.num_pigeons is 4:
+                get_sprite = self.gold_get
+            screen.blit(get_sprite, (Config.WIDTH / 2 - get_sprite.get_width() / 2, 200))
+        elif self.counter < 5:
+            screen.blit(self.rescue_banner, (Config.WIDTH / 2 - self.rescue_banner.get_width() / 2, 200))
+        
         # render game over screen
         if (self.player.lives <= 0):
             
@@ -92,7 +115,8 @@ class GameScene(Scene):
 
     # Updates the scene according to the time passed since last update.
     def update(self, delta):
-
+        self.counter += delta
+        
         #if (self.player.lives is 2):
         #    self.__init__(self.game)
         if self.player.lives is 0:
@@ -103,7 +127,7 @@ class GameScene(Scene):
         if self.player.lives > 0:
 
             self.level.update(delta, self)
-            self.player.update(delta)
+            self.player.update(delta, self)
             self.player_projectile_cooldown -= delta
             bullettype = self.player.status
             x = self.player.position[0]+60
@@ -113,15 +137,15 @@ class GameScene(Scene):
                 cap = 0.2
                 damage = 50
                 sprite = self.sprite_b1
-            if bullettype == 2:
+            elif bullettype == 2:
                 cap = 0.5
                 damage = 15
                 sprite = self.sprite_b2
-            if bullettype == 3:
+            elif bullettype == 3:
                 cap = 0.2
                 damage = 30
                 sprite = self.sprite_b3
-            if bullettype == 4:
+            elif bullettype == 4:
                 cap = 0.1
                 damage = 50
                 sprite = self.sprite_b4
@@ -169,11 +193,13 @@ class GameScene(Scene):
                 if (p.x > Config.WIDTH or p.y > Config.HEIGHT or p.y < 0.0):
                     self.enemy_projectiles.remove(p)
 
+
             # update obstacles
             obstacles_to_remove = []
             for obstacle in self.obstacles:
                 # Make obstacle move to match map scrolling speed
-                obstacle.x -= Config.SCROLL_SPEED * delta
+                if self.level.time <= self.level.duration:
+                    obstacle.x -= Config.SCROLL_SPEED * delta
                 obstacle.update(delta, self.player)
                 
                 if obstacle.x < -50:
@@ -186,7 +212,8 @@ class GameScene(Scene):
             enemies_to_remove = []
             for enemy in self.enemies:
                 # Make enemy move to match map scrolling speed
-                enemy.x -= Config.SCROLL_SPEED * delta
+                if self.level.time <= self.level.duration:
+                    enemy.x -= Config.SCROLL_SPEED * delta
                 should_remove = enemy.update(delta, self.player, self)
                 
                 if enemy.x < -50 or should_remove:
@@ -196,6 +223,7 @@ class GameScene(Scene):
                 self.enemies.remove(enemy)
 
             self.ProgressBar.update(delta)
-        
+            
+            # update special attack icons
             for i in range(len(self.player.pidgeons) - 1):
                 self.cd_icon[i].update(delta)

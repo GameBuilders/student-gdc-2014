@@ -12,6 +12,8 @@ class Game():
         self.running = True
         self.paused = False
         
+        self.num_pigeons = 1
+        
         # Used to manage the various scenes in the game.
         self.scene_manager = SceneManager()
         

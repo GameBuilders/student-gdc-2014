@@ -1,6 +1,7 @@
 import pygame
 from config import *
 from projectile import *
+from sound import *
 
 class Enemy():
     def __init__(self, spritesheet, y, bullet):
@@ -23,6 +24,8 @@ class Enemy():
         screen.blit(sprite, (self.x, self.y))
     
     def update(self, delta, player, game_scene):
+        difference = player.position[1] - 50 - self.y
+        self.y += delta * 90 * (1 if difference > 10 else (-1 if difference < -10 else 0))
         self.fire_timer -= delta
         if self.fire_timer <= 0:
             self.fire_timer += self.fire_rate
@@ -52,5 +55,6 @@ class Enemy():
             player.projectiles.remove(proj)
             
         if self.health <= 0:
+            play_sound('assets/sounds/enemy_death.wav')
             return True #true = remove me
         return False
