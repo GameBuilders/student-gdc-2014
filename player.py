@@ -27,7 +27,7 @@ class Player():
     
     # Kill the player!
     def die(self):
-        if not self.dead:
+        if not self.dead and (self.stun == -1):
             print "Player died!"
             self.lives -= 1
             self.dead = True
