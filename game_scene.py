@@ -28,6 +28,11 @@ class GameScene(Scene):
 
         self.rescue_banner = pygame.image.load('assets/rescue.png')
         
+        self.red_get = pygame.image.load('assets/red_get.png')
+        self.blue_get = pygame.image.load('assets/blue_get.png')
+        self.purple_get = pygame.image.load('assets/purple_get.png')
+        self.gold_get = pygame.image.load('assets/gold_get.png')
+        
         self.lives_sprite= pygame.image.load('assets/heart.png')
         self.lives_rect= self.lives_sprite.get_rect()
         self.level = Level(self.game.num_pigeons)
