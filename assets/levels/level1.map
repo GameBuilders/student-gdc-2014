@@ -3,7 +3,7 @@
 [level]
 front   = level1_foreground.png
 back    = level1_background.png
-duration  = 50
+duration  = 50000
 
 # OBSTACLE/ENEMY LIST
 
@@ -34,24 +34,24 @@ boxdr = (54,54)
 # TIMELINE OF EVENTS
 
 [events]
-3   = o_bat,200
-4   = o_spikelow,100
-10    = o_spikelow,500
-15    = o_spikelow,200
-20    = o_spikelow,500
-21    = o_bat,200
-22    = o_bat,190
-23    = o_bat,180
-24    = o_bat,170
-25    = o_bat,160
-26    = o_spikelow,300
-30    = o_spikelow,400
-31    = o_bat,200
-32    = o_bat,190
-33    = o_bat,180
-34    = o_bat,170
-35    = o_bat,160
-36    = o_spikelow,200
-40    = o_spikelow,300
-45    = o_spikelow,600
-48    = o_bird,380
+3000   = o_bat,200
+4000   = o_spikelow,100
+10000    = o_spikelow,500
+15000    = o_spikelow,200
+20000    = o_spikelow,500
+21000    = o_bat,200
+22000    = o_bat,190
+23000    = o_bat,180
+24000    = o_bat,170
+25000    = o_bat,160
+26000    = o_spikelow,300
+30000    = o_spikelow,400
+31000    = o_bat,200
+32000    = o_bat,190
+33000    = o_bat,180
+34000    = o_bat,170
+35000    = o_bat,160
+36000    = o_spikelow,200
+40000    = o_spikelow,300
+45000    = o_spikelow,600
+48000    = o_bird,380
