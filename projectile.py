@@ -8,7 +8,7 @@ class Projectile():
 		self.y = y
 		self.x_vel = x_vel
 		self.y_vel = y_vel
-		self.sprite = pygame.image.load(os.path.join('assets','fireball_icon.png'))
+		self.sprite = pygame.image.load(os.path.join('assets','projectile.png'))
 
 	def update(self,delta):
 		self.x += delta * self.x_vel
