@@ -2,6 +2,7 @@ import pygame
 import sys
 import os
 from game import *
+from datetime import datetime
 
 def main():
     # Initialize Pygame
@@ -32,6 +33,11 @@ def main():
             # Quit if the user closes the window
             if event.type == pygame.QUIT:
                 game.running = False
+            elif event.type == pygame.KEYDOWN:
+                if (event.key == pygame.K_p):
+                    date = datetime.now().date().isoformat()
+                    time = datetime.now().time().isoformat()
+                    pygame.image.save(screen, "screenshot_" + date + "_" + time + ".png")
         
         # Update the game according to the time passed since last frame
         game.update(delta)
